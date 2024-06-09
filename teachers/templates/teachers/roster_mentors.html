@@ -1,0 +1,105 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static "css/teachers.css" %}">
+        <!-- Подключаем Bootstrap для стилей -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <h2 class="am_teachers"><strong>Teachers/Mentors | 65</strong></h2>
+        <div class="filter_up">
+            <!-- Вторая фильтрационная панель (новая) -->
+            <div class="dropdown d-inline-block me-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select type of studying
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Offline studying')">Offline studying</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Online studying')">Online studying</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Blended studying')">Blended studying</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose location
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="locationDropdown">
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Москва')">Москва</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Санкт-Петербург')">Санкт-Петербург</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Новосибирск')">Новосибирск</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Екатеринбург')">Екатеринбург</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Казань')">Казань</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Другие')">Другие</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown d-inline-block sort_dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="locationDropdown">
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'A-Z')">A-Z</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'Z-A')">Z-A</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'By experience')">By experience</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'By age')">By age</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row no-gutters">
+            <div class="container col-md-8 mt-4 teacher_card">
+                <div class="mt-4 info_abt">
+                    <h2 class="full_name">{{ first_name }} {{ last_name }}</h2>
+                    <p class="spec">Specialization: {{ specialization }}</p>
+                    <p class="age"> Age: {{ age }}</p>
+                    <p class="exp"> Experience: {{ experience }}</p>
+                    <button class="more_inf">More info</button>
+                </div>
+            </div>
+            <div class="col-md-4 categ_filt">
+                <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
+                <ul class="filter_right">
+                    <li class="jj">
+                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Англійська мова</a>
+                    </li>
+                    <li class="jj">
+                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Іспанська мова</a>
+                    </li>
+                    <li class="jj">
+                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Математика</a>
+                    </li>
+                    <li class="jj">
+                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Біологія</a>
+                    </li>
+                    <li class="jj">
+                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Англійська мова</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Подключаем Bootstrap JS для работы дропдаунов -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript для обновления текста кнопки и значений формы -->
+        <script>
+            function updateDropdown(dropdownId, text) {
+                const button = document.getElementById(dropdownId);
+                button.textContent = text;
+
+                // Обновление значения скрытого поля
+                if (dropdownId === 'experienceDropdown') {
+                    document.getElementById('experienceInput').value = text;
+                } else if (dropdownId === 'locationDropdown') {
+                    document.getElementById('locationInput').value = text;
+                }
+            }
+        </script>
+    </body>
+{% endblock %}
