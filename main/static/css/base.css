@@ -83,8 +83,11 @@ body {
     color: black;
         margin-left: 25px;
     &:hover {
-        text-decoration: none;
-        color: black;
+
+        }
     }
 }
+a:hover {
+    text-decoration: none;
+        color: black;
 }

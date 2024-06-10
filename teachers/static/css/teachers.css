@@ -1,6 +1,6 @@
 .teacher_card {
     margin-left: 68px;
-    max-width: 900px;
+    max-width: 950px;
     height: 230px;
     background-color: white;
     border: 1px solid #CCCCCC;
@@ -28,7 +28,28 @@
         top: 165px;
         left: 790px;
     }
+    .choose_sort_btn {
+        border: 2px solid  #987654;
+        border-radius: 10px;
+        color: #987654;
+        box-shadow:
+    rgba(0, 0, 0, 0.15) 0 1px 2px,
+        rgba(0, 0, 0, 0.15) 0 2px 4px,
+        rgba(0, 0, 0, 0.15) 0 4px 8px,
+        rgba(0, 0, 0, 0.15) 0 8px 16px,
+        rgba(0, 0, 0, 0.15) 0 16px 32px,
+        rgba(0, 0, 0, 0.15) 0 32px 64px;
+        background: white;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
+        &:focus, &:active{
+            color: white;
+            background: #987654;
+
+        }
+    }
 }
+
 
 .more_inf {
     transform: translate(400%, -90%);
@@ -52,7 +73,6 @@
 
 .more_inf:hover {
     box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-
 }
 
 .categ_filt {
@@ -71,16 +91,24 @@
             max-width: 250px;
 
         .jj {
+
             list-style-type: none;
             border-radius: 25px;
             margin-bottom: 10px;
+            box-shadow:  21px 21px 41px #afafaf,
+             -21px -21px 41px #ffffff;
+            border: 2px solid  #987654;
+
+
             .category{
                 color: #987654;
-                font-size: 22px;
+                font-size: 21px;
+                padding: 10px 20px;
             }
         }
     }
 }
+
 
 
 
