@@ -11,6 +11,22 @@ body {
             border: 2px solid white;
         }
 
+        .block_registtr {
+            position: absolute;
+            top: 20px;
+            left: 75vw;
+            font-size: 20px;
+
+            .dropdown_registr{
+                background: transparent;
+                border: none;
+            }
+
+            .icon_registr {
+                color: white;
+            }
+        }
+
         .app-name-outline {
       font-size: 2rem;
       font-weight: bold;
@@ -24,7 +40,7 @@ body {
     .app-name-outline .connect {
       color: transparent;
       -webkit-text-stroke: 1px white;
-    }
+        }
     }
 
 }
@@ -82,12 +98,14 @@ body {
     .choose_btn {
     color: black;
         margin-left: 25px;
-    &:hover {
-
-        }
     }
 }
-a:hover {
-    text-decoration: none;
+
+a {
+    color:black;
+    &:hover {
+        text-decoration: none;
         color: black;
+    }
 }
+

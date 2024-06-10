@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <input type="text" placeholder="Phone number">
-    <input type="password" placeholder="Password">
-</body>
-</html>
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static "css/login.css" %}">
+      <title>About Us</title>
+    </head>
+    <body>
+        <input type="text" placeholder="Phone number">
+        <input type="password" placeholder="Password">
+    </body>
+{% endblock %}
+

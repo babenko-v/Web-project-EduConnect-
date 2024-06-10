@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <input type="text" placeholder="Last name">
-    <input type="text" placeholder="First name">
-    <input type="text" placeholder="Phone number">
-    <input type="password" placeholder="Password">
-    <input type="text" placeholder="Info about you">
+{% extends "main/base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static "css/registration.css" %}">
+    </head>
+    <body>
+        <input type="text" placeholder="Last name">
+        <input type="text" placeholder="First name">
+        <input type="text" placeholder="Phone number">
+        <input type="password" placeholder="Password">
+        <input type="text" placeholder="Info about you">
+    </body>
+{% endblock %}
+
+
+
