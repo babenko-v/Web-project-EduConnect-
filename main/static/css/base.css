@@ -20,6 +20,7 @@ body {
             .dropdown_registr{
                 background: transparent;
                 border: none;
+                outline: none;
             }
 
             .icon_registr {
@@ -96,7 +97,7 @@ body {
   width: 300px;
   border-radius: 0 15px 15px 0;
     .choose_btn {
-    color: black;
+        color: black;
         margin-left: 25px;
     }
 }

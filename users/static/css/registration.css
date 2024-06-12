@@ -1,5 +1,5 @@
 
-.registration-container {
+.registration_container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@
     margin-top: 20px;
 }
 
-.form-container {
+.form_container {
     background: #fff;
     padding: 2rem;
     border-radius: 10px;
@@ -23,17 +23,17 @@
 h2 {
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
 }
 
-.register-form {
+.register_form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.form-group {
+.form_group {
     display: flex;
     justify-content: space-between;
 
@@ -42,7 +42,7 @@ h2 {
     }
 }
 
-.form-group input {
+.form_group input {
     width: 48%;
     padding: 0.5rem;
     border: 1px solid #ddd;
@@ -50,12 +50,12 @@ h2 {
     font-size: 15px;
 }
 
-.password-container {
+.password_container {
     position: relative;
     width: 48%;
 }
 
-.password-container input {
+.password_container input {
     width: 100%;
     padding-right: 30px;
 }
@@ -76,7 +76,7 @@ h2 {
     outline: none;
 }
 
-.register-button {
+.register_button {
     background-color: #987654;
     color: white;
     padding: 0.75rem;
@@ -91,12 +91,17 @@ h2 {
     align-self: center;
 }
 
-.register-button:hover {
+.register_button:hover {
     background-color: #654321;
 }
 
-.form-container::before {
-    content: '';
+.register_button:hover ~ .decor_before, .register_button:hover ~ .decor_after {
+    transition: 0.2s;
+    background: #25cb41;
+    border: 15px solid #46fc52;
+}
+
+.decor_before {
     position: absolute;
     top: -2rem;
     right: -2rem;
@@ -106,13 +111,15 @@ h2 {
     border-radius: 50%;
 }
 
-.form-container::after {
-    content: '';
+.decor_after {
     position: absolute;
-    bottom: -2rem;
+    bottom: -3rem;
     left: -2rem;
     width: 150px;
     height: 150px;
     background: #654321;
     border-radius: 50%;
 }
+
+
+

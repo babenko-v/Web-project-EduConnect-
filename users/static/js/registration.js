@@ -7,3 +7,5 @@ document.getElementById('togglePassword').addEventListener('click', function (e)
     const icon = this.querySelector('.material-icons');
     icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
 });
+
+
