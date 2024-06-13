@@ -58,7 +58,7 @@
                     <p class="spec">Specialization: {{ specialization }}</p>
                     <p class="age"> Age: {{ age }}</p>
                     <p class="exp"> Experience: {{ experience }}</p>
-                    <button class="more_inf">More info</button>
+                    <button class="more_inf"><a href="{% url 'users:profile' %}" type="button">More info</a></button>
                 </div>
             </div>
             <div class="col-md-4 categ_filt">
@@ -83,19 +83,6 @@
             </div>
         </div>
 
-        <!-- JavaScript для обновления текста кнопки и значений формы -->
-        <script>
-            function updateDropdown(dropdownId, text) {
-                const button = document.getElementById(dropdownId);
-                button.textContent = text;
-
-                // Обновление значения скрытого поля
-                if (dropdownId === 'experienceDropdown') {
-                    document.getElementById('experienceInput').value = text;
-                } else if (dropdownId === 'locationDropdown') {
-                    document.getElementById('locationInput').value = text;
-                }
-            }
-        </script>
+        <script src="{% static 'js/mentors.js' %}"></script>
     </body>
 {% endblock %}
