@@ -85,7 +85,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1rem;
-    width: 60%;
+    width: 50%;
     text-transform: uppercase;
     font-weight: bold;
     align-self: center;
@@ -96,7 +96,7 @@ h2 {
 }
 
 .register_button:hover ~ .decor_before, .register_button:hover ~ .decor_after {
-    transition: 0.2s;
+    transition: 0.4s;
     background: #25cb41;
     border: 15px solid #46fc52;
 }
@@ -121,5 +121,13 @@ h2 {
     border-radius: 50%;
 }
 
+.link {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  margin: 5px 0;
 
-
+  .span {
+      color: blue;
+  }
+}

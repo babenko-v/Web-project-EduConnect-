@@ -10,6 +10,7 @@
 <body>
     <div class="container registration_container">
         <div class="form_container">
+            {% block login %}
             <h2>Sign up</h2>
             <form action="/register" method="POST" class="register_form">
                 <div class="form_group">
@@ -44,10 +45,17 @@
                       <option value="PE">
                     </datalist>
                 </div>
+                {% endblock login %}
                 <button type="submit" class="register_button">Register</button>
+                {% block link %}
+                    <p class="link">Already have an acount ?
+                        <a href="{% url 'users:login' %}" class="span">Sign in</a>
+                    </p>
+                {% endblock link %}
 
                 <div class="decor_before"></div>
                 <div class="decor_after"></div>
+
             </form>
         </div>
     </div>
@@ -55,5 +63,4 @@
 </body>
 {% endblock %}
 
-<!-- Элемент datalist с опциями -->
 

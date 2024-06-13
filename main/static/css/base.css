@@ -90,6 +90,9 @@ body {
     }
 }
 
+input {
+    font-size: 14px;
+}
 
 .modal-content {
   height: 75vh;

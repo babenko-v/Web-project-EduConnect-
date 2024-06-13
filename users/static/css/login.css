@@ -1,0 +1,30 @@
+.form_group {
+    display: flow;
+    margin-left: 60px;
+
+    .password_container {
+        margin-top: 30px;
+        width: 80%;
+        margin-bottom: 30px;
+    }
+    .email_input{
+        width: 80%;
+    }
+}
+.register_button {
+    margin-left: 105px;
+    margin-bottom: 10px;
+    width: 45%;
+}
+
+.form_container {
+    width: 50%;
+}
+
+.registration_container {
+    width: 60%;
+}
+
+.link {
+    margin-left: 25px;
+}
