@@ -4,10 +4,44 @@
 {% block content %}
     <head>
         <link rel="stylesheet" href="{% static "css/profile.css" %}">
-      <title>About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        chikchirik
+       <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-picture"></div>
+            <div class="profile-info">
+                <h1>John Doe</h1>
+                <h2>Mathematics Teacher</h2>
+                <div class="contact-info">
+                    <div><strong class="header_prof">Age</strong> 35</div>
+                    <div><strong class="header_prof">Experience</strong> 10 years</div>
+                    <div><strong class="header_prof">Mode of Teaching</strong> Remote and In-person</div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div class="profile-details">
+                <h3><strong class="header_prof">About</strong></h3>
+                <p>John Doe is an experienced mathematics teacher specializing in high school and college level math. He is passionate about making complex concepts accessible and understandable for all students.</p>
+                <h3><strong class="header_prof">Work Experience</strong></h3>
+                <ul>
+                    <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
+                    <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
+                </ul>
+                <h3><strong class="header_prof">Specialization</strong></h3>
+                <p>Algebra, Calculus, Geometry, Statistics</p>
+            </div>
+            <div class="contact-details">
+                <h3><strong class="header_prof">Contact Information</strong></h3>
+                <p><strong>Phone:</strong> +1 123 456 7890</p>
+                <p><strong>E-mail:</strong> john.doe@example.com</p>
+                <p><strong>Site:</strong> <a href="https://www.johndoe.com">www.johndoe.com</a></p>
+                <h3><strong class="header_prof">Education</strong></h3>
+                <p>Master's in Mathematics from DEF University (2008)</p>
+            </div>
+        </div>
+    </div>
     </body>
 {% endblock %}
