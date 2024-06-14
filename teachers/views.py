@@ -12,4 +12,12 @@ def roster(request):
     return render(request, "teachers/roster_mentors.html", context)
 
 def mentors(request):
-    return render(request, "teachers/card_mentor.html")
+    context = {
+        'first_name': 'Margaret',
+        'last_name': 'Bulishko',
+        'phone': '067554212',
+        'age': '22',
+        'experience': '3',
+        'specialization': 'English, Polish, Ukrainian language teacher'
+    }
+    return render(request, "teachers/card_mentor.html", context)

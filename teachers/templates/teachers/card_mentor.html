@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "users/profile.html" %}
+{% load static %}
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
 <body>
+    {% block full_name %} {{ last_name }} {{ first_name }}  {% endblock full_name %}
+    {% block age %} {{ age }} {% endblock age %}
+    {% block spec %} {{ specialization }} {% endblock spec %}
+    {% block exp %} {{ experience }} {% endblock exp %}
+    {% block type_teach %} ... {% endblock type_teach %}
+    {% block info_teacher %} ... {% endblock info_teacher %}
+    {% block places_work %} ... {% endblock places_work %}
+    {% block other_spec %} {{ specialization }} {% endblock other_spec %}
+    {% block contact_info %} ... {% endblock contact_info %}
+    {% block places_edu %} ... {% endblock places_edu %}
+{% block btn %}
 
+{% endblock btn %}
 </body>
-</html>
