@@ -1,9 +1,9 @@
  body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+     margin: 0;
+     padding: 0;
+ }
         .profile-container {
+            font-family: 'Poppins', sans-serif;
             max-width: 900px;
             margin: 20px auto;
             background-color: #fff;
@@ -84,7 +84,6 @@
             }
         }
 
-
  .header_prof {
      background-color: #BBA58E;
      border-radius: 10px;
@@ -92,3 +91,31 @@
      padding: 1px 6px;
  }
 
+ .add_info, .contact_input_info {
+    padding: 0.2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+ }
+
+ .contact_input_info {
+     display: flex;
+     flex-direction: column;
+     width: 250px;
+     margin-bottom: 15px;
+ }
+
+.fixed-textarea {
+    width: 400px;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.confirm_info {
+    transform: translate(160%, -220%);
+    padding: 15px 40px;
+}

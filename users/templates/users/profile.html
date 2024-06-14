@@ -15,33 +15,118 @@
                 <h1>John Doe</h1>
                 <h2>Mathematics Teacher</h2>
                 <div class="contact-info">
-                    <div><strong class="header_prof">Age</strong> 35</div>
-                    <div><strong class="header_prof">Experience</strong> 10 years</div>
-                    <div><strong class="header_prof">Mode of Teaching</strong> Remote and In-person</div>
+                    <div>
+                        <strong class="header_prof">Age</strong>
+                        {% if 5 < 2 %}
+                            35
+                        {% else %}
+                            <input class="add_info" type="text" placeholder="Enter your age">
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <strong class="header_prof">Experience</strong>
+                        {% if 5 < 2 %}
+                            10 years
+                        {% else %}
+                            <input class="add_info" type="text" placeholder="Enter your experience">
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <strong class="header_prof">Mode of Teaching</strong>
+                        {% if 5 < 2 %}
+                            Remote
+                        {% else %}
+                            <div class="dropdown d-inline-block me-2">
+                                <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button" id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select type of studying
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
+                                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Offline studying')">Offline studying</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Online studying')">Online studying</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Blended studying')">Blended studying</a></li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="profile-content">
             <div class="profile-details">
-                <h3><strong class="header_prof">About</strong></h3>
-                <p>John Doe is an experienced mathematics teacher specializing in high school and college level math. He is passionate about making complex concepts accessible and understandable for all students.</p>
-                <h3><strong class="header_prof">Work Experience</strong></h3>
-                <ul>
-                    <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
-                    <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
-                </ul>
-                <h3><strong class="header_prof">Specialization</strong></h3>
-                <p>Algebra, Calculus, Geometry, Statistics</p>
+                <h3>
+                    <strong class="header_prof">Info about you</strong>
+                </h3>
+                {% if 5 < 2 %}
+                    <p>
+                        John Doe is an experienced mathematics teacher specializing in high school and college level math. He is passionate about making complex concepts accessible and understandable for all students.
+                    </p>
+                {% else %}
+                            <textarea class="fixed-textarea" placeholder="Enter detailed information about you"></textarea>
+                {% endif %}
+
+                <h3>
+                    <strong class="header_prof">Work Experience</strong>
+                </h3>
+
+                {% if 5 < 2 %}
+                    <ul>
+                        <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
+                        <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
+                    </ul>
+                {% else %}
+                            <textarea class="fixed-textarea"
+                                      placeholder="Enter places of employment for the last 5 years (each place of employment please separate /) "></textarea>
+                {% endif %}
+
+                <h3>
+                    <strong class="header_prof">Specialization</strong>
+                </h3>
+
+                {% if 5 < 2 %}
+                    <ul>
+                        <p>Algebra, Calculus, Geometry, Statistics</p>
+                    </ul>
+                {% else %}
+                            <textarea class="fixed-textarea"
+                                      placeholder="Enter areas of study or other sciences you may teach"></textarea>
+                {% endif %}
+
             </div>
             <div class="contact-details">
-                <h3><strong class="header_prof">Contact Information</strong></h3>
-                <p><strong>Phone:</strong> +1 123 456 7890</p>
-                <p><strong>E-mail:</strong> john.doe@example.com</p>
-                <p><strong>Site:</strong> <a href="https://www.johndoe.com">www.johndoe.com</a></p>
-                <h3><strong class="header_prof">Education</strong></h3>
-                <p>Master's in Mathematics from DEF University (2008)</p>
+                <h3>
+                    <strong class="header_prof">Contact Information</strong>
+                </h3>
+
+                {% if 5 < 2 %}
+                    <p><strong>Phone:</strong> +1 123 456 7890</p>
+                    <p><strong>E-mail:</strong> john.doe@example.com</p>
+                {% else %}
+                    <input class="contact_input_info" type="text" placeholder="Enter your Phone number">
+                    <input class="contact_input_info" type="text" placeholder="Enter your Telegram">
+                    <input class="contact_input_info" type="text" placeholder="Enter your Facebook">
+                    <input class="contact_input_info" type="text" placeholder="Enter your X">
+                {% endif %}
+
+                <h3>
+                    <strong class="header_prof">Education</strong>
+                </h3>
+
+                {% if 5 < 2 %}
+                    <ul>
+                        <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
+                        <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
+                    </ul>
+                {% else %}
+                            <textarea class="fixed-textarea"
+                                      placeholder="Enter the places where you received your education (each place of education please separate /) "></textarea>
+                {% endif %}
             </div>
         </div>
+       <button type="button" class="btn btn-outline-success confirm_info">Success</button>
     </div>
     </body>
+    <script src="{% static 'js/mentors.js' %}"></script>
 {% endblock %}
