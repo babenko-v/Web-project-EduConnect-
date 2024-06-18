@@ -60,19 +60,19 @@
             <nav aria-label="Site navigation">
               <ul class="ap list-group mt-2">
                 <li class="action-list-item list-group-item">
-                    <a class='choose_btn'href="{% url 'main:main' %}" role="button">Home page</a>
+                    <a class='choose_btn' href="{% url 'main:main' %}" role="button">Home page</a>
                 </li>
                 <li class="action-list-item list-group-item">
                     <a class='choose_btn' href="{% url 'teachers:roster' %}">Teachers' page</a>
                 </li>
                 <li class="action-list-item list-group-item">
-                <a class='choose_btn'href="{% url 'main:about' %}" role="button">About Us</a>
+                <a class='choose_btn' href="{% url 'main:about' %}" role="button">About Us</a>
                 </li>
-                {% if user.teacher %}
-                    <li class="action-list-item list-group-item">
-                        <a>My account</a>
-                    </li>
-                {% endif %}
+{#                {% if user.teacher %}#}
+{#                    <li class="action-list-item list-group-item">#}
+{#                        <a>My account</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
               </ul>
                 <div class="container mt-4 instruct">
                     <small>
