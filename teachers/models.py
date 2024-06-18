@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+class specializations(models.Model):
+    name = models.CharField(max_length=150, unique=True,)
+
+    class Meta:
+        db_table = 'specialization'
+        ordering = ['id',]
+
