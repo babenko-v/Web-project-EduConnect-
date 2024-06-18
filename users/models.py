@@ -1,7 +1,7 @@
 from django.db import models
 
-from django.contrib.auth.models import AbstractUser
 from django.db.models import IntegerField
+# from django.contrib.auth.models import AbstractUser
 
 from teachers.models import Specializations
 
@@ -39,21 +39,21 @@ class Mode_teaching(models.Model):
         return self.name_mode
 
 
-class Teacher_profile(AbstractUser):
-    age = models.PositiveIntegerField()
-    experience = models.PositiveIntegerField(default=0)
-    info_about_teacher = models.TextField()
-    work_experience = models.TextField()
-    education = models.TextField()
-    other_specialities = models.TextField()
-    locations = models.ForeignKey(to=Locations, on_delete=models.CASCADE)
-    main_specialty = models.ForeignKey(to=Specializations, on_delete=models.CASCADE)
-    contact_info = models.ForeignKey(to=Contact_info, on_delete=models.CASCADE)
+class Teacher_profile(models.Model):
+    age = models.IntegerField(null=True, blank=True)
+    experience = models.PositiveIntegerField(default=0, null=True, blank=True)
+    info_about_teacher = models.TextField(null=True, blank=True)
+    work_experience = models.TextField(null=True, blank=True)
+    education = models.TextField(null=True, blank=True)
+    other_specialities = models.TextField(null=True, blank=True)
+    locations = models.ForeignKey(to=Locations, on_delete=models.PROTECT)
+    main_specialty = models.ForeignKey(to=Specializations, on_delete=models.PROTECT)
+    contact_info = models.ForeignKey(to=Contact_info, on_delete=models.PROTECT)
 
     image = models.ImageField(upload_to='users_images', blank=True, null=True, verbose_name='profile_image')
 
     def __str__(self):
-        return f'{self.last_name} {self.first_name}'
+        return f'{self.main_specialty}'
 
 
 

@@ -16,9 +16,11 @@
                     Select type of studying
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Offline studying')">Offline studying</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Online studying')">Online studying</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Blended studying')">Blended studying</a></li>
+
+                    {% for mode in modes %}
+                        <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }} studying</a></li>
+                    {% endfor %}
+
                 </ul>
             </div>
 
@@ -27,12 +29,15 @@
                     Choose location
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="locationDropdown">
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Москва')">Москва</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Санкт-Петербург')">Санкт-Петербург</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Новосибирск')">Новосибирск</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Екатеринбург')">Екатеринбург</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Казань')">Казань</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', 'Другие')">Другие</a></li>
+
+                    {% for loca in locality %}
+
+                              <li><a class="dropdown-item" href="#" onclick="updateDropdown('locationDropdown', '{{ loca.name }}')">
+                                  {{loca.name}}
+                              </a></li>
+
+                    {% endfor %}
+
                 </ul>
             </div>
 
@@ -40,6 +45,7 @@
                 <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Sort
                 </button>
+
                 <ul class="dropdown-menu" aria-labelledby="locationDropdown">
                     <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'A-Z')">A-Z</a></li>
                     <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'Z-A')">Z-A</a></li>
@@ -48,8 +54,6 @@
                 </ul>
             </div>
         </div>
-
-
 
         <div class="row no-gutters">
             <div class="container col-md-8 mt-4 teacher_card">
@@ -61,24 +65,17 @@
                     <button class="more_inf"><a href="{% url 'teachers:mentors' %}" type="button">More info</a></button>
                 </div>
             </div>
+
             <div class="col-md-4 categ_filt">
                 <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
                 <ul class="filter_right">
-                    <li class="jj">
-                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Англійська мова</a>
-                    </li>
-                    <li class="jj">
-                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Іспанська мова</a>
-                    </li>
-                    <li class="jj">
-                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Математика</a>
-                    </li>
-                    <li class="jj">
-                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Біологія</a>
-                    </li>
-                    <li class="jj">
-                        <a class='list-group-item category' href="{% url 'main:main' %}" role="button">Англійська мова</a>
-                    </li>
+
+                        {% for spec in specializations %}
+                            <li class="jj">
+                                <a class='list-group-item category' href="{% url 'main:main' %}" role="button">{{ spec.name_spec }}</a>
+                            </li>
+                        {% endfor %}
+
                 </ul>
             </div>
         </div>

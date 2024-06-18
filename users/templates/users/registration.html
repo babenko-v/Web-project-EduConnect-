@@ -28,21 +28,23 @@
                 </div>
                 <div class="form_group">
                     <input type="text" list="cityes" id="location" name="location" placeholder="Location" required>
+
                     <datalist id="cityes">
-                      <option value="Kyiv">
-                      <option value="Kharkiv">
-                      <option value="Summu">
-                      <option value="Lviv">
-                      <option value="Odessa">
+
+                        {% for loca in locations %}
+                              <option value="{{ loca.name }}">
+                        {% endfor %}
+
                     </datalist>
 
                     <input type="text" list="specialties" id="specialization" name="specialization" placeholder="Specialization" required>
+
                     <datalist id="specialties">
-                      <option value="English">
-                      <option value="Spanish">
-                      <option value="Math">
-                      <option value="Biology">
-                      <option value="PE">
+
+                        {% for spec in specializations %}
+                              <option value="{{ spec.name_spec }}">
+                        {% endfor %}
+
                     </datalist>
                 </div>
                 {% endblock login %}

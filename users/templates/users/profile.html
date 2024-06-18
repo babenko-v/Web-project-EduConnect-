@@ -59,10 +59,14 @@
                                     </button>
 
                                     <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
-                                        <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Offline studying')">Offline studying</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Online studying')">Online studying</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', 'Blended studying')">Blended studying</a></li>
+
+                                        {% for mode in modes %}
+
+                                            <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }} studying</a></li>
+
+                                        {% endfor %}
                                     </ul>
+
                                 </div>
                             {% endif %}
                         {% endblock type_teach %}
