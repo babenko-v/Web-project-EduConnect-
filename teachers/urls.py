@@ -5,5 +5,5 @@ app_name = 'teachers'
 
 urlpatterns = [
     path('',  views.roster, name='roster'),
-    path('forms/', views.mentors, name='mentors'),
+    path('forms/<int:mentors_id>/', views.mentors, name='mentors'),
 ]

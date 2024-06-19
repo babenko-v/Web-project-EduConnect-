@@ -30,4 +30,4 @@ def registration(request):
         'locations': locations,
     }
 
-    return render(request, "users/registration.html", context)
+    return render(request, "users/registration.html", context=context)

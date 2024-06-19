@@ -16,9 +16,7 @@
 
                     {% for info in profiles %}
                         <h1>
-                            {% block full_name %}
-                                {{ info.last_name }} {{ info.first_name }}
-                            {% endblock full_name %}
+                            {{ info.last_name }} {{ info.first_name }}
                         </h1>
 
                         <h2>
@@ -30,52 +28,57 @@
                                 <div class="contact-info">
                                     <div>
                                         <strong class="header_prof">Age</strong>
-                                        {% block age %}
+
                                             {% if info.age %}
                                                 {{ info.age }}
                                             {% else %}
-                                                <input class="add_info" type="text" placeholder="Enter your age">
+                                                {% block noinfo1 %}
+                                                    <input class="add_info" type="text" placeholder="Enter your age">
+                                                {% endblock noinfo1 %}
                                             {% endif %}
-                                        {% endblock age %}
+
                                     </div>
 
                                     <div>
                                         <strong class="header_prof">Experience</strong>
-                                        {% block exp %}
+
                                             {% if info.experience %}
                                                 {{ info.experience }} years
                                             {% else %}
-                                                <input class="add_info" type="text" placeholder="Enter your experience">
+                                                {% block noinfo2 %}
+                                                    <input class="add_info" type="text" placeholder="Enter your experience">
+                                                {% endblock noinfo2 %}
                                             {% endif %}
-                                        {% endblock exp %}
+
                                     </div>
 
                                     <div>
                                         <strong class="header_prof">Mode of Teaching</strong>
-                                        {% block type_teach %}
+
                                             {% if info.mode_teaching %}
                                                 {{ info.mode_teaching }}
                                             {% else %}
-                                                <div class="dropdown d-inline-block me-2">
-                                                    <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button"
-                                                            id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Select type of studying
-                                                    </button>
+                                                    {% block noinfo3 %}
+                                                    <div class="dropdown d-inline-block me-2">
+                                                        <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button"
+                                                                id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Select type of studying
+                                                        </button>
 
-                                                    <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
+                                                        <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
 
-                                                        {% for mode in modes %}
+                                                            {% for mode in modes %}
 
-                                                            <li><a class="dropdown-item" href="#"
-                                                                   onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }}
-                                                                studying</a></li>
+                                                                <li><a class="dropdown-item" href="#"
+                                                                       onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }}
+                                                                    studying</a></li>
 
-                                                        {% endfor %}
-                                                    </ul>
-
-                                                </div>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                               {% endblock noinfo3 %}
                                             {% endif %}
-                                        {% endblock type_teach %}
+
                                     </div>
                                 </div>
                             </div>
@@ -86,41 +89,46 @@
                                 <h3>
                                     <strong class="header_prof">Info about you</strong>
                                 </h3>
-                                {% block info_teacher %}
+
                                     {% if info.info_about_teacher %}
                                         <p>
                                             {{ info.info_about_teacher }}
                                         </p>
                                     {% else %}
-                                        <textarea class="fixed-textarea"
-                                                  placeholder="Enter detailed information about you"></textarea>
+                                        {% block noinfo4 %}
+                                            <textarea class="fixed-textarea"
+                                                      placeholder="Enter detailed information about you"></textarea>
+                                        {% endblock noinfo4 %}
                                     {% endif %}
-                                {% endblock info_teacher %}
+
 
                                 <h3>
                                     <strong class="header_prof">Work Experience</strong>
                                 </h3>
-                                {% block places_work %}
+
+
                                     {% if info.work_experience %}
                                         {{ info.work_experience }}
                                     {% else %}
-                                        <textarea class="fixed-textarea"
-                                                  placeholder="Enter places of employment for the last 5 years (each place of employment please separate /) "></textarea>
+                                        {% block noinfo5 %}
+                                            <textarea class="fixed-textarea"
+                                                      placeholder="Enter places of employment for the last 5 years"></textarea>
+                                        {% endblock noinfo5 %}
                                     {% endif %}
-                                {% endblock places_work %}
+
 
                                 <h3>
                                     <strong class="header_prof">Other specialization</strong>
                                 </h3>
-                                {% block other_spec %}
+
                                     {% if info.other_specialities %}
                                         <p>{{ info.other_specialities }}</p>
                                     {% else %}
-                                        <textarea class="fixed-textarea"
+                                        {% block noinfo6 %}
+                                            <textarea class="fixed-textarea"
                                                   placeholder="Enter areas of study or other sciences you may teach"></textarea>
+                                        {% endblock noinfo6 %}
                                     {% endif %}
-                                {% endblock other_spec %}
-
                             </div>
                             <div class="contact-details">
                                 <h3>
@@ -137,8 +145,10 @@
                                                 <p><strong>{{ cont_info|title }}:</strong> {{ value }}</p>
 
                                             {% else %}
-                                                <input class="contact_input_info" type="text"
-                                                       placeholder="Enter your {{ cont_info }}">
+                                                {% block noinfo8 %}
+                                                    <input class="contact_input_info" type="text"
+                                                           placeholder="Enter your {{ cont_info }}">
+                                                {% endblock noinfo8 %}
                                             {% endif %}
                                         {% endwith %}
 
@@ -154,8 +164,10 @@
                                     {% if info.education %}
                                         {{ info.education }}
                                     {% else %}
-                                        <textarea class="fixed-textarea"
+                                        {% block noinfo7 %}
+                                            <textarea class="fixed-textarea"
                                                   placeholder="Enter the places where you received your education (each place of education please separate /) "></textarea>
+                                        {% endblock noinfo7 %}
                                     {% endif %}
                                 {% endblock places_edu %}
                             </div>

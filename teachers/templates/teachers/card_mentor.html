@@ -7,17 +7,25 @@
 </head>
 <body>
 
-    {% block full_name %} {{ last_name }} {{ first_name }}  {% endblock full_name %}
-    {% block age %} {{ age }} {% endblock age %}
-    {% block spec %} {{ specialization }} {% endblock spec %}
-    {% block exp %} {{ experience }} {% endblock exp %}
-    {% block type_teach %} ... {% endblock type_teach %}
-    {% block info_teacher %} ... {% endblock info_teacher %}
-    {% block places_work %} ... {% endblock places_work %}
-    {% block other_spec %} {{ specialization }} {% endblock other_spec %}
-    {% block contact_info %} ... {% endblock contact_info %}
-    {% block places_edu %} ... {% endblock places_edu %}
+{% block noinfo1 %}
+    {% block noinfo2 %}
+        {% block noinfo3 %}
+            {% block noinfo4 %}
+                {% block noinfo5 %}
+                    {% block noinfo6 %}
+                        {% block noinfo7 %}
+                            <i>Information not provided</i>
+                        {% endblock noinfo7 %}
+                    {% endblock noinfo6 %}
+                {% endblock noinfo5 %}
+            {% endblock noinfo4 %}
+        {% endblock noinfo3 %}
+    {% endblock noinfo2 %}
+{% endblock noinfo1 %}
 
+{% block noinfo8 %}
+
+{% endblock noinfo8 %}
 
 {% block btn %}
 

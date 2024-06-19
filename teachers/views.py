@@ -19,16 +19,13 @@ def roster(request):
     }
     return render(request, "teachers/roster_mentors.html", context)
 
-def mentors(request):
-    profiles = Teacher_profile.objects.filter(id=1)
+def mentors(request, mentors_id):
+    profiles = Teacher_profile.objects.filter(id=mentors_id)
+    list_conact_info = ('phone', 'telegram', 'facebook', 'instagram')
+
 
     context = {
         "profiles": profiles,
-        'first_name': 'Margaret',
-        'last_name': 'Bulishko',
-        'phone': '067554212',
-        'age': '22',
-        'experience': '3',
-        'specialization': 'English, Polish, Ukrainian language teacher'
+        'list_contact': list_conact_info
     }
-    return render(request, "teachers/card_mentor.html", context)
+    return render(request, "teachers/card_mentor.html", context=context)
