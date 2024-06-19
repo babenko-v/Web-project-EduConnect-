@@ -1,163 +1,171 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load filters_profile %}
 
 {% block content %}
     <head>
         <link rel="stylesheet" href="{% static "css/profile.css" %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
-       <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-picture"></div>
-            <div class="profile-info">
-                <h1>
-                    {% block full_name %}
-                        John Doe
-                    {% endblock full_name %}
-                </h1>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-picture"></div>
+                <div class="profile-info">
+                    {% for info in profiles %}
+                        <h1>
+                            {% block full_name %}
+                                {{ info.last_name }} {{ info.first_name }}
+                            {% endblock full_name %}
+                        </h1>
 
-                <h2>
-                    {% block spec %}
-                        Mathematics Teacher
-                    {% endblock spec %}
-                </h2>
+                        <h2>
+                            {% block spec %}
+                                {{ info.main_specialty }} Teacher
+                            {% endblock spec %}
+                        </h2>
 
-                <div class="contact-info">
-                    <div>
-                        <strong class="header_prof">Age</strong>
-                        {% block age %}
-                            {% if 5 < 2 %}
-                                35
-                            {% else %}
-                                <input class="add_info" type="text" placeholder="Enter your age">
-                            {% endif %}
-                        {% endblock age %}
-                    </div>
+                                <div class="contact-info">
+                                    <div>
+                                        <strong class="header_prof">Age</strong>
+                                        {% block age %}
+                                            {% if info.age %}
+                                                {{ info.age }}
+                                            {% else %}
+                                                <input class="add_info" type="text" placeholder="Enter your age">
+                                            {% endif %}
+                                        {% endblock age %}
+                                    </div>
 
-                    <div>
-                        <strong class="header_prof">Experience</strong>
-                        {% block exp %}
-                            {% if 5 < 2 %}
-                                10 years
-                            {% else %}
-                                <input class="add_info" type="text" placeholder="Enter your experience">
-                            {% endif %}
-                        {% endblock exp %}
-                    </div>
+                                    <div>
+                                        <strong class="header_prof">Experience</strong>
+                                        {% block exp %}
+                                            {% if info.experience %}
+                                                {{ info.experience }} years
+                                            {% else %}
+                                                <input class="add_info" type="text" placeholder="Enter your experience">
+                                            {% endif %}
+                                        {% endblock exp %}
+                                    </div>
 
-                    <div>
-                        <strong class="header_prof">Mode of Teaching</strong>
-                        {% block type_teach %}
-                            {% if 5 < 2 %}
-                                Remote
-                            {% else %}
-                                <div class="dropdown d-inline-block me-2">
-                                    <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button" id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Select type of studying
-                                    </button>
+                                    <div>
+                                        <strong class="header_prof">Mode of Teaching</strong>
+                                        {% block type_teach %}
+                                            {% if info.mode_teaching %}
+                                                {{ info.mode_teaching }}
+                                            {% else %}
+                                                <div class="dropdown d-inline-block me-2">
+                                                    <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button"
+                                                            id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Select type of studying
+                                                    </button>
 
-                                    <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
+                                                    <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
 
-                                        {% for mode in modes %}
+                                                        {% for mode in modes %}
 
-                                            <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }} studying</a></li>
+                                                            <li><a class="dropdown-item" href="#"
+                                                                   onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }}
+                                                                studying</a></li>
 
-                                        {% endfor %}
-                                    </ul>
+                                                        {% endfor %}
+                                                    </ul>
 
+                                                </div>
+                                            {% endif %}
+                                        {% endblock type_teach %}
+                                    </div>
                                 </div>
-                            {% endif %}
-                        {% endblock type_teach %}
+                            </div>
+                        </div>
+
+                        <div class="profile-content">
+                            <div class="profile-details">
+                                <h3>
+                                    <strong class="header_prof">Info about you</strong>
+                                </h3>
+                                {% block info_teacher %}
+                                    {% if info.info_about_teacher %}
+                                        <p>
+                                            {{ info.info_about_teacher }}
+                                        </p>
+                                    {% else %}
+                                        <textarea class="fixed-textarea"
+                                                  placeholder="Enter detailed information about you"></textarea>
+                                    {% endif %}
+                                {% endblock info_teacher %}
+
+                                <h3>
+                                    <strong class="header_prof">Work Experience</strong>
+                                </h3>
+                                {% block places_work %}
+                                    {% if info.work_experience %}
+                                        {{ info.work_experience }}
+                                    {% else %}
+                                        <textarea class="fixed-textarea"
+                                                  placeholder="Enter places of employment for the last 5 years (each place of employment please separate /) "></textarea>
+                                    {% endif %}
+                                {% endblock places_work %}
+
+                                <h3>
+                                    <strong class="header_prof">Other specialization</strong>
+                                </h3>
+                                {% block other_spec %}
+                                    {% if info.other_specialities %}
+                                        <p>{{ info.other_specialities }}</p>
+                                    {% else %}
+                                        <textarea class="fixed-textarea"
+                                                  placeholder="Enter areas of study or other sciences you may teach"></textarea>
+                                    {% endif %}
+                                {% endblock other_spec %}
+
+                            </div>
+                            <div class="contact-details">
+                                <h3>
+                                    <strong class="header_prof">Contact Information</strong>
+                                </h3>
+                                {% block contact_info %}
+
+                                    <p><strong>E-mail:</strong> {{ info.contact_info.email }}</p>
+
+                                    {% for cont_info in list_contact %}
+
+                                        {% with value=info.contact_info|get_attr:cont_info %}
+                                            {% if value %}
+                                                <p><strong>{{ cont_info|title }}:</strong> {{ value }}</p>
+
+                                            {% else %}
+                                                <input class="contact_input_info" type="text"
+                                                       placeholder="Enter your {{ cont_info }}">
+                                            {% endif %}
+                                        {% endwith %}
+
+                                    {% endfor %}
+
+                                {% endblock contact_info %}
+
+                                <h3>
+                                    <strong class="header_prof">Education</strong>
+                                </h3>
+
+                                {% block places_edu %}
+                                    {% if info.education %}
+                                        {{ info.education }}
+                                    {% else %}
+                                        <textarea class="fixed-textarea"
+                                                  placeholder="Enter the places where you received your education (each place of education please separate /) "></textarea>
+                                    {% endif %}
+                                {% endblock places_edu %}
+                            </div>
+                    {% endfor %}
                     </div>
-                </div>
-            </div>
+            {% block btn %}
+                {% if 5 > 2 %}
+                    <button type="button" class="btn btn-outline-success confirm_info">Success</button>
+                {% endif %}
+            {% endblock btn %}
         </div>
-
-        <div class="profile-content">
-            <div class="profile-details">
-                <h3>
-                    <strong class="header_prof">Info about you</strong>
-                </h3>
-                {% block info_teacher %}
-                    {% if 5 < 2 %}
-                        <p>
-                            John Doe is an experienced mathematics teacher specializing in high school and college level math. He is passionate about making complex concepts accessible and understandable for all students.
-                        </p>
-                    {% else %}
-                                <textarea class="fixed-textarea" placeholder="Enter detailed information about you"></textarea>
-                    {% endif %}
-                {% endblock info_teacher %}
-
-                <h3>
-                    <strong class="header_prof">Work Experience</strong>
-                </h3>
-                {% block places_work %}
-                    {% if 5 < 2 %}
-                        <ul>
-                            <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
-                            <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
-                        </ul>
-                    {% else %}
-                                <textarea class="fixed-textarea"
-                                          placeholder="Enter places of employment for the last 5 years (each place of employment please separate /) "></textarea>
-                    {% endif %}
-                {% endblock places_work %}
-
-                <h3>
-                    <strong class="header_prof">Other specialization</strong>
-                </h3>
-                {% block other_spec %}
-                    {% if 5 < 2 %}
-                            <p>Algebra, Calculus, Geometry, Statistics</p>
-                    {% else %}
-                                <textarea class="fixed-textarea"
-                                          placeholder="Enter areas of study or other sciences you may teach"></textarea>
-                    {% endif %}
-                {% endblock other_spec %}
-
-            </div>
-            <div class="contact-details">
-                <h3>
-                    <strong class="header_prof">Contact Information</strong>
-                </h3>
-                {% block contact_info %}
-                    <p><strong>Phone:</strong> +1 123 456 7890</p>
-                    <p><strong>E-mail:</strong> john.doe@example.com</p>
-                    {% if 5 < 2 %}
-                        {{ last_name }} {{ first_name }}
-                    {% else %}
-                        <input class="contact_input_info" type="text" placeholder="Enter your Phone number">
-                        <input class="contact_input_info" type="text" placeholder="Enter your Telegram">
-                        <input class="contact_input_info" type="text" placeholder="Enter your Facebook">
-                        <input class="contact_input_info" type="text" placeholder="Enter your Instagram">
-                    {% endif %}
-                {% endblock contact_info %}
-
-                <h3>
-                    <strong class="header_prof">Education</strong>
-                </h3>
-
-                {% block places_edu %}
-                    {% if 5 < 2 %}
-                        <ul>
-                            <li>Senior Mathematics Teacher at XYZ High School (2015 - Present)</li>
-                            <li>Mathematics Lecturer at ABC University (2010 - 2015)</li>
-                        </ul>
-                    {% else %}
-                                <textarea class="fixed-textarea"
-                                          placeholder="Enter the places where you received your education (each place of education please separate /) "></textarea>
-                    {% endif %}
-                {% endblock places_edu %}
-            </div>
-        </div>
-       {% block btn %}
-           {% if 5 > 2 %}
-                <button type="button" class="btn btn-outline-success confirm_info">Success</button>
-           {% endif %}
-       {% endblock btn %}
-    </div>
     </body>
     <script src="{% static 'js/mentors.js' %}"></script>
 {% endblock %}

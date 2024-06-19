@@ -1,14 +1,19 @@
 from django.shortcuts import render
 
 from teachers.models import Specializations
-from users.models import Locations, Mode_teaching
+from users.models import Locations, Mode_teaching, Teacher_profile
 
 
 def profile(request):
     modes = Mode_teaching.objects.all()
+    profiles = Teacher_profile.objects.all()
+
+    list_conact_info = ('phone', 'telegram', 'facebook', 'instagram')
 
     context = {
         'modes': modes,
+        "profiles": profiles,
+        'list_contact': list_conact_info
     }
 
     return render(request, "users/profile.html", context)
