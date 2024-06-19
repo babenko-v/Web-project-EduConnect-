@@ -6,7 +6,7 @@ from users.models import Locations, Mode_teaching, Teacher_profile
 
 def profile(request):
     modes = Mode_teaching.objects.all()
-    profiles = Teacher_profile.objects.all()
+    profiles = Teacher_profile.objects.filter(id=1)
 
     list_conact_info = ('phone', 'telegram', 'facebook', 'instagram')
 

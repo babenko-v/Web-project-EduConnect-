@@ -1,9 +1,12 @@
 {% extends "users/profile.html" %}
 {% load static %}
+
+
 <head>
 
 </head>
 <body>
+
     {% block full_name %} {{ last_name }} {{ first_name }}  {% endblock full_name %}
     {% block age %} {{ age }} {% endblock age %}
     {% block spec %} {{ specialization }} {% endblock spec %}
@@ -14,6 +17,8 @@
     {% block other_spec %} {{ specialization }} {% endblock other_spec %}
     {% block contact_info %} ... {% endblock contact_info %}
     {% block places_edu %} ... {% endblock places_edu %}
+
+
 {% block btn %}
 
 {% endblock btn %}
