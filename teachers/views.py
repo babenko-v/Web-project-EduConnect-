@@ -8,24 +8,29 @@ from django.shortcuts import render
 
 
 def roster(request):
-    # Получаем все объекты из базы данных для использования в шаблоне
+
     modes = Mode_teaching.objects.all()
     locality = Locations.objects.all()
     specializations = Specializations.objects.all()
 
-
-    # Получаем все профили учителей из базы данных
     profiles = Teacher_profile.objects.all()
 
-    # Получаем параметры запроса
     type_std = request.GET.get('type_std')
-    type_speciality = request.GET.get('type_speciality')
+    speciality = request.GET.get('speciality')
+    location = request.GET.get('location')
+    sort = request.GET.get('sort')
 
-    if type_speciality:
-        profiles = profiles.filter(main_specialty__name_spec=type_speciality)
+    if speciality:
+        profiles = profiles.filter(main_specialty__name_spec=speciality)
 
     if type_std:
         profiles = profiles.filter(mode_teaching__name_mode=type_std)
+
+    if location:
+        profiles = profiles.filter(locations__name=location)
+
+    if sort:
+        profiles = profiles.order_by(sort)
 
 
 

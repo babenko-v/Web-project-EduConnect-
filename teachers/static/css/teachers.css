@@ -24,10 +24,22 @@
     margin-top: 30px;
     margin-left: 150px;
 
+    .confirm_btn {
+        position: absolute;
+        top: 165px;
+        left: 850px;
+    }
+
+
+    .input_filt {
+        margin-left: 120px;
+    }
+
+
     .sort_dropdown {
         position: absolute;
         top: 165px;
-        left: 790px;
+        left: 527px;
     }
     .choose_sort_btn {
         border: 2px solid  #987654;
@@ -115,6 +127,20 @@
             }
         }
     }
+}
+
+.display-text, .display-text-sort {
+    font-family: 'Poppins', sans-serif;
+    height: 20px;
+    line-height: 20px;
+    color: #987654;
+    /*font-weight: bold;*/
+    font-size: 18px;
+    margin-top: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 15px;
 }
 
 
