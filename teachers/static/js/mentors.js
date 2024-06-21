@@ -1,11 +1,15 @@
-function updateDropdown(dropdownId, text) {
-                const button = document.getElementById(dropdownId);
-                button.textContent = text;
+function updateDropdown(dropdownId, value) {
+    const button = document.getElementById(dropdownId);
+    button.textContent = value + ' studying';
 
                 // Обновление значения скрытого поля
-                if (dropdownId === 'experienceDropdown') {
-                    document.getElementById('experienceInput').value = text;
-                } else if (dropdownId === 'locationDropdown') {
-                    document.getElementById('locationInput').value = text;
-                }
+            if (dropdownId === 'experienceDropdown') {
+                document.getElementById('experienceInput').value = value + ' studying';
+            } else if (dropdownId === 'locationDropdown') {
+                document.getElementById('locationInput').value = value + ' studying';
             }
+
+
+}
+
+

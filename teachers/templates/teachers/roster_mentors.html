@@ -9,17 +9,24 @@
     </head>
 
     <body>
-        <h2 class="am_teachers"><strong>Teachers/Mentors | 65</strong></h2>
-        <div class="filter_up">
+
+        <h2 class="am_teachers"><strong>Teachers/Mentors | {{ profiles_amount }}</strong></h2>
+        <form class="filter_up" method="get">
 
             <!-- Фильтры -->
+
             <div class="dropdown d-inline-block me-2">
-                <button class="btn btn-success dropdown-toggle choose_sort_btn" type="button" id="experienceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-success dropdown-toggle choose_sort_btn" id="experienceDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                     Select type of studying
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
                     {% for mode in modes %}
-                        <li><a class="dropdown-item" href="#" onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }} studying</a></li>
+                        <li>
+                            <button class="dropdown-item" name="type_std" value="{{ mode.name_mode }}">
+                                {{ mode.name_mode }} studying
+                            </button>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -46,7 +53,7 @@
                     <li><a class="dropdown-item" href="#" onclick="updateDropdown('sortDropdown', 'By age')">By age</a></li>
                 </ul>
             </div>
-        </div>
+        </form>
 
         <div class="row no-gutters">
             {% for info in profiles %}
@@ -67,16 +74,20 @@
 
             <div class="col-md-4 categ_filt">
                 <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
+                <form method="get">
                 <ul class="filter_right">
                     <li class="jj">
-                        <a class='list-group-item category' href="{% url 'teachers:roster' %}" role="button">All mentors</a>
+                        <button class='list-group-item category'  role="button">All mentors</button>
                     </li>
+
                     {% for spec in specializations %}
                         <li class="jj">
-                            <a class='list-group-item category' href="{% url 'teachers:roster' spec.name_spec %}" role="button">{{ spec.name_spec }}</a>
+                            <button class='list-group-item category' name='type_speciality' value='{{ spec.name_spec }}' role="button">{{ spec.name_spec }}</button>
                         </li>
                     {% endfor %}
+
                 </ul>
+                </form>
             </div>
         </div>
 
