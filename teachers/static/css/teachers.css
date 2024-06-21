@@ -125,6 +125,7 @@
                 font-size: 21px;
                 padding: 10px 20px;
                 width: 100%;
+                overflow-clip:var();
 
                 &:hover,  &:focus {
                     outline: none;
@@ -137,7 +138,12 @@
                     background: #9AF063;
                     color: white;
                     font-weight: bold;
+
+
+
                 }
+                /*&:focus ~ category:a*/
+
             }
         }
     }

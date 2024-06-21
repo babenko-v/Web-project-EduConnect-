@@ -32,7 +32,7 @@
                     </li>
                 {% endfor %}
             </ul>
-            <div id="expId" class="display-text"></div>
+            <div id="expId" class="display-text">{% if request.GET.type_std %}{{ request.GET.type_std }} studying {% endif %}</div>
             <input type="hidden" id="experienceInput" name="type_std" class="input_filt">
         </div>
 
@@ -52,7 +52,7 @@
                     </li>
                 {% endfor %}
             </ul>
-            <div id="locId" class="display-text"></div>
+            <div id="locId" class="display-text"> {% if request.GET.location %}{{ request.GET.location }}{% endif %}</div>
             <input type="hidden" id="locationInput" name="location" class="input_filt">
         </div>
 
@@ -65,25 +65,25 @@
             <ul class="dropdown-menu" aria-labelledby="sortDropdown">
                 <li>
                     <button type="button" class="dropdown-item"
-                            onclick="updateDropdown('sortId', 'last_name', 'sortInput')">
+                            onclick="updateDropdown('sortId', 'A-Z', 'sortInput')">
                         A-Z
                     </button>
                 </li>
                 <li>
                     <button type="button" class="dropdown-item"
-                            onclick="updateDropdown('sortId', '-last_name', 'sortInput')">
+                            onclick="updateDropdown('sortId', 'Z-A', 'sortInput')">
                         Z-A
                     </button>
                 </li>
                 <li>
                     <button type="button" class="dropdown-item"
-                            onclick="updateDropdown('sortId', 'experience', 'sortInput')">
+                            onclick="updateDropdown('sortId', 'By experience', 'sortInput')">
                         By experience
                     </button>
                 </li>
                 <li>
                     <button type="button" class="dropdown-item"
-                            onclick="updateDropdown('sortId', 'age', 'sortInput')">
+                            onclick="updateDropdown('sortId', 'By age', 'sortInput')">
                         By age
                     </button>
                 </li>
@@ -124,7 +124,17 @@
                 {% for spec in specializations %}
                     <li class="jj">
                         <button class='list-group-item category' type='button'
-                                onclick="updateDropdown('specId', '{{ spec.name_spec }}', 'specialityInput')">{{ spec.name_spec }}</button>
+                            {% if request.GET.speciality == spec.name_spec %}
+                                style="
+                                    border: 2px solid white;
+                                    background: #649C3F;
+                                    color: white;
+                                    font-weight: bold;
+                                "
+                            {% endif %}
+                            onclick="updateDropdown('specId', '{{ spec.name_spec }}', 'specialityInput')">
+                            {{ spec.name_spec }}
+                        </button>
                     </li>
                 {% endfor %}
 

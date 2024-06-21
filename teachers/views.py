@@ -36,7 +36,7 @@ def roster(request):
 
 
     # Пагинация
-    paginator = Paginator(profiles, 3)  # Количество элементов на странице
+    paginator = Paginator(profiles, 1)  # Количество элементов на странице
     page_number = request.GET.get('page', 1)
 
 
