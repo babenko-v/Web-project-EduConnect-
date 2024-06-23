@@ -5,15 +5,17 @@
 {% block content %}
 <head>
     <link rel="stylesheet" href="{% static "css/teachers.css" %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <form class="d-flex search-form" role="search">
+        <input class="form-control me-2 search_input" type="search" placeholder="Type.." aria-label="Search">
+        <button class="btn btn-outline-light btn_search" type="submit">Search</button>
+    </form>
 
     <h2 class="am_teachers"><strong>Teachers/Mentors | {{ profiles_amount }}</strong></h2>
     <form method="get">
     <div class="filter_up">
-
         <!-- Фильтры -->
 
         <!-- Фильтр типа обучения -->
@@ -114,6 +116,7 @@
         {% endfor %}
 
         <div class="col-md-4 categ_filt">
+
             <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
 
             <ul class="filter_right">

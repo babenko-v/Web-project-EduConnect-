@@ -98,6 +98,7 @@
     position: absolute;
     transform: translate(370%, -18%);
     max-width: 300px;
+
     .header {
         transform: translate(2%, 150%);
         font-size: 24px;
@@ -138,12 +139,7 @@
                     background: #9AF063;
                     color: white;
                     font-weight: bold;
-
-
-
                 }
-                /*&:focus ~ category:a*/
-
             }
         }
     }
@@ -163,6 +159,25 @@
     margin-left: 15px;
 }
 
+.search-form {
+    position: absolute;
+    left: 600px;
+    top: 15px;
+
+    .search_input {
+        max-width: 100%;
+        border: 3px solid wheat;
+        border-radius: 7px;
+    }
+
+    .btn_search{
+        margin-left: 10px;
+
+        &:hover {
+            color: green;
+        }
+    }
+}
 
 
 

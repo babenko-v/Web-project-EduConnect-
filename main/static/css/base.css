@@ -17,7 +17,7 @@ body {
             left: 75vw;
             font-size: 20px;
 
-            .dropdown_registr{
+            .dropdown_registr {
                 background: transparent;
                 border: none;
                 outline: none;
@@ -29,18 +29,25 @@ body {
         }
 
         .app-name-outline {
-      font-size: 2rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-    }
-    .app-name-outline .edu {
-      color: transparent;
-      -webkit-text-stroke: 1px black;
-    }
-    .app-name-outline .connect {
-      color: transparent;
-      -webkit-text-stroke: 1px white;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .edu, .connect {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .app-name-outline .edu {
+            color: transparent;
+            -webkit-text-stroke: 1px black;
+
+        }
+
+        .app-name-outline .connect {
+            color: transparent;
+            -webkit-text-stroke: 1px white;
         }
     }
 
