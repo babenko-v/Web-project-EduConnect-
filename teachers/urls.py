@@ -5,6 +5,6 @@ app_name = 'teachers'
 
 urlpatterns = [
     path('',  views.roster, name='roster'),
-
+    path('search/',  views.roster, name='search'),
     path('forms/<int:mentors_id>/', views.mentors, name='mentors'),
 ]

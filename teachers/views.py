@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
+from teachers.utils import search_query
 
 from django.shortcuts import render
 
@@ -12,6 +13,7 @@ def roster(request):
     modes = Mode_teaching.objects.all()
     locality = Locations.objects.all()
     specializations = Specializations.objects.all()
+    query = request.GET.get('q')
 
     profiles = Teacher_profile.objects.all()
 
@@ -19,6 +21,11 @@ def roster(request):
     speciality = request.GET.get('speciality')
     location = request.GET.get('location')
     sort = request.GET.get('sort')
+
+    if query:
+        profiles = search_query(query)
+    else:
+        ...
 
     if speciality:
         profiles = profiles.filter(main_specialty__name_spec=speciality)
@@ -36,7 +43,7 @@ def roster(request):
 
 
     # Пагинация
-    paginator = Paginator(profiles, 1)  # Количество элементов на странице
+    paginator = Paginator(profiles, 3)  # Количество элементов на странице
     page_number = request.GET.get('page', 1)
 
 

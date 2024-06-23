@@ -134,7 +134,7 @@
                     padding: 10px 20px;
                 }
 
-                &:focus {
+                &:focus, &:active {
                     border: 2px solid white;
                     background: #9AF063;
                     color: white;

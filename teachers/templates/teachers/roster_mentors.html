@@ -8,16 +8,20 @@
 </head>
 
 <body>
-    <form class="d-flex search-form" role="search">
-        <input class="form-control me-2 search_input" type="search" placeholder="Type.." aria-label="Search">
+    <form class="d-flex search-form" role="search" action="{% url 'teachers:search' %}" method="get">
+        <input class="form-control me-2 search_input" type="search" name="q" placeholder="Type.." aria-label="Search">
         <button class="btn btn-outline-light btn_search" type="submit">Search</button>
     </form>
 
     <h2 class="am_teachers"><strong>Teachers/Mentors | {{ profiles_amount }}</strong></h2>
-    <form method="get">
+    <form method="get" action="{% if request.GET.q %}{% url 'teachers:search' %}{% else %}{% url 'teachers:roster' %}{% endif %}">
     <div class="filter_up">
-        <!-- Фильтры -->
 
+    {% if request.GET.q %}
+        <input type="hidden" name="q" value="{{ request.GET.q }}">
+    {% endif %}
+
+        <!-- Фильтры -->
         <!-- Фильтр типа обучения -->
         <div class="dropdown d-inline-block me-2">
             <button class="btn btn-success dropdown-toggle choose_sort_btn" id="experienceDropdown"
