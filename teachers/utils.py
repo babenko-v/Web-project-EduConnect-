@@ -1,15 +1,42 @@
 from django.db.models import Q
+from django.contrib.postgres.search import (
+    SearchVector,
+    SearchQuery,
+    SearchRank,
+    SearchHeadline,
+)
 
 from users.models import Teacher_profile
 
+
 def search_query(query):
-    query_split = query.split()
 
-    keyword = [word for word in query_split if len(word)>2]
-    q_object = Q()
+    vector = SearchVector("first_name", "last_name")
+    query = SearchQuery(query)
 
-    for token in keyword:
-        q_object |= Q(first_name=token)
-        q_object |= Q(last_name=token)
-        q_object |= Q(info_about_teacher__contains=token)
-    return Teacher_profile.objects.filter(q_object)
+    result = (
+        Teacher_profile.objects.annotate(rank=SearchRank(vector, query))
+        .filter(rank__gt=0)
+        .order_by("-rank")
+    )
+
+    result = result.annotate(
+        headline_firstname=SearchHeadline(
+            "first_name",
+            query,
+            start_sel='<span style="color: #E2725B;'
+                      'font-style: italic;">',
+            stop_sel="</span>",
+        )
+    )
+    result = result.annotate(
+        headline_lastname=SearchHeadline(
+            "last_name",
+            query,
+            start_sel='<span style="color: #E2725B;'
+                      'font-style: italic;">',
+            stop_sel="</span>",
+        )
+    )
+
+    return result

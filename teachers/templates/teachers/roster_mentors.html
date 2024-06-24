@@ -106,7 +106,23 @@
         {% for info in profiles %}
             <div class="container col-md-8 mt-4 teacher_card">
                 <div class="mt-4 info_abt">
-                    <h2 class="full_name">{{ info.first_name }} {{ info.last_name }}</h2>
+                    <h2 class="full_name">
+
+                        {% autoescape off %}
+                            {% if info.headline_firstname %}
+                                {{ info.headline_firstname }}
+                            {% else %}
+                                {{ info.first_name }}
+                            {% endif %}
+
+                            {% if info.headline_lastname %}
+                                {{ info.headline_lastname }}
+                            {% else %}
+                                {{ info.last_name }}
+                            {% endif %}
+                        {% endautoescape %}
+                    </h2>
+
                     <p class="spec"><strong>Specialization:</strong> {{ info.main_specialty }} teacher</p>
                     {% if info.age %}
                         <p class="age"><strong>Age:</strong> {{ info.age }}</p>
