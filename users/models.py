@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.db.models import IntegerField
-# from django.contrib.auth.models import AbstractUser
 
 from teachers.models import Specializations
 
@@ -16,8 +15,8 @@ class Locations(models.Model):
         return self.name
 
 class Contact_info(models.Model):
-    phone = IntegerField(verbose_name='phone number')
-    email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
+    phone = IntegerField(verbose_name='phone number', blank=True, null=True)
+    email = models.EmailField( max_length=254, verbose_name='email address', unique=True)
     telegram = models.CharField(max_length=50, unique=True, blank=True, null=True)
     facebook = models.CharField(max_length=100, unique=True, blank=True, null=True)
     instagram = models.CharField(max_length=50, unique=True, blank=True, null=True)
