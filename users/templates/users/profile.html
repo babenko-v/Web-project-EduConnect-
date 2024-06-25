@@ -133,9 +133,8 @@
                                 <h3>
                                     <strong class="header_prof">Contact Information</strong>
                                 </h3>
-                                {% block contact_info %}
 
-                                    <p><strong>E-mail:</strong> {{ info.contact_info.email }}</p>
+                                    <p><strong>Personal identifier:</strong> {{ info.username }}</p>
 
                                     {% for cont_info in list_contact %}
 
@@ -152,8 +151,6 @@
                                         {% endwith %}
 
                                     {% endfor %}
-
-                                {% endblock contact_info %}
 
                                 <h3>
                                     <strong class="header_prof">Education</strong>

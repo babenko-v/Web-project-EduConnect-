@@ -14,7 +14,9 @@
                 {% block noinfo5 %}
                     {% block noinfo6 %}
                         {% block noinfo7 %}
-                            <i>Information not provided</i>
+
+                                <i>Information not provided</i>
+
                         {% endblock noinfo7 %}
                     {% endblock noinfo6 %}
                 {% endblock noinfo5 %}
@@ -24,7 +26,9 @@
 {% endblock noinfo1 %}
 
 {% block noinfo8 %}
-
+    {% if profiles.contact_info %}
+        <i>Information not provided</i>
+    {% endif %}
 {% endblock noinfo8 %}
 
 {% block btn %}
