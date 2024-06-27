@@ -6,7 +6,7 @@ from users.models import Teacher_profile, Locations
 from teachers.models import  Specializations
 
 
-class TeacherLoginForm(AuthenticationForm):
+class TeacherLoginForm(forms.Form):
 
     username = forms.CharField()
     password = forms.CharField()
@@ -20,6 +20,8 @@ class TeacherRegisterForm(UserCreationForm):
     last_name = forms.CharField()
     username = forms.CharField()
     password = forms.CharField()
+    password1 = forms.CharField()
+    password2 = forms.CharField()
 
     locations = forms.ModelChoiceField(queryset=Locations.objects.all())
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all())
@@ -30,5 +32,7 @@ class TeacherRegisterForm(UserCreationForm):
                   'last_name',
                   'username',
                   'password',
+                  'password1',
+                  'password2',
                   'locations',
                   'main_specialty')

@@ -24,6 +24,15 @@
 
         <div class="decor_before"></div>
         <div class="decor_after"></div>
+         <div class="form_errors">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
     </form>
     </body>
 {% endblock login %}

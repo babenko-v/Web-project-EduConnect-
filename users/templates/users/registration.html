@@ -7,92 +7,107 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="container registration_container">
-        <div class="form_container">
-            {% block login %}
-            <h2>Sign up</h2>
-            <form action="{% url 'users:registration' %}" method="POST" class="register_form">
-                {% csrf_token %}
-                <div class="form_group">
-                    <input type="text" id="id_first_name"
-                           value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
-                           name="first_name"
-                           placeholder="First Name" required>
-                    {% if form.first_name.errors %}{{ form.first_name.errors }}{% endif %}
+<div class="container registration_container">
+    <div class="form_container">
+        {% block login %}
+        <h2>Sign up</h2>
+        <form action="{% url 'users:registration' %}" method="POST" class="register_form">
+            {% csrf_token %}
+            <div class="form_group">
+                <input type="text" id="id_first_name"
+                       value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                       name="first_name"
+                       placeholder="First Name" required>
+                {% if form.first_name.errors %}{{ form.first_name.errors }}{% endif %}
 
 
-                    <input type="text" id="id_last_name"
-                           value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
-                           name="last_name"
-                           placeholder="Last Name" required>
-                    {% if form.last_name.errors %}{{ form.last_name.errors }}{% endif %}
+                <input type="text" id="id_last_name"
+                       value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                       name="last_name"
+                       placeholder="Last Name" required>
+                {% if form.last_name.errors %}{{ form.last_name.errors }}{% endif %}
+            </div>
+
+            <div class="form_group">
+                <input type="text" id="id_username"
+                       value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+                       name="username" placeholder="Personal identifier" required>
+                {% if form.username.errors %}{{ form.password.errors }}{% endif %}
+                <div class="password_container">
+                    <input class="password_input" type="password" id="id_password"
+                           value="{% if form.password.value %}{{ form.password.value }}{% endif %}"
+                           name="password" placeholder="Password" required>
+                    <button type="button" id="togglePassword" class="toggle-password mt-1" tabindex="-1">
+                        <span class="material-icons">visibility</span>
+                    </button>
                 </div>
+                <input type="hidden" name="password1" id="id_password1" value="qwerty1232222">
+                <input type="hidden" name="password2" id="id_password2" value="qwerty1232222">
+            </div>
 
-                <div class="form_group">
-                    <input type="text" id="id_username"
-                           value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
-                           name="username" placeholder="Personal identifier" required>
-                    {% if form.username.errors %}{{ form.password.errors }}{% endif %}
-                    <div class="password_container">
-                        <input class="password_input" type="password" id="id_password"
-                               value="{% if form.password.value %}{{ form.password.value }}{% endif %}"
-                               name="password" placeholder="Password" required>
-                        <button type="button" id="togglePassword" class="toggle-password mt-1" tabindex="-1">
-                            <span class="material-icons">visibility</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="form_group">
+                <input type="text" list="cityes" id="id_locations" name="locations" placeholder="Location" required>
 
-                <div class="form_group">
-                    <input type="text" list="cityes" id="id_locations" name="locations" placeholder="Location" required>
+                <datalist id="cityes">
+                    {% for loca in locations %}
+                    <option value="{{ loca.name }}" data-id="{{ loca.id }}"></option>
+                    {% endfor %}
+                </datalist>
 
-                    <datalist id="cityes">
+                <input type="text" list="specialties" id="id_main_specialty" name="main_specialty"
+                       placeholder="Specialization" required>
+                <datalist id="specialties">
+                    {% for spec in specializations %}
+                    <option value="{{ spec.name_spec }}" data-id="{{ spec.id }}"></option>
+                    {% endfor %}
+                </datalist>
+            </div>
 
-                        {% for loca in locations %}
-                              <option value="{{ loca.id }}">
-                        {% endfor %}
+            <button type="submit" class="register_button">Register</button>
+            <div class="decor_before"></div>
+            <div class="decor_after"></div>
 
-                    </datalist>
+        {% endblock login %}
 
-                    <input type="text" list="specialties" id="id_main_specialty" name="main_specialty" placeholder="Specialization" required>
-
-                    <datalist id="specialties">
-
-                        {% for spec in specializations %}
-                              <option value="{{ spec.id }}">
-                        {% endfor %}
-
-                    </datalist>
-                </div>
-
-                <button type="submit" class="register_button">Register</button>
-                <div class="decor_before"></div>
-                <div class="decor_after"></div>
-
-                {% endblock login %}
-
-                {% block link %}
-                    <p class="link">Already have an acсount ?
-                        <a href="{% url 'users:login' %}" class="span">Sign in</a>
-                    </p>
-                {% endblock link %}
-{% if form.errors %}
-    <div class="form_errors">
-        <ul>
-            {% for field, errors in form.errors.items %}
+        {% block link %}
+        <p class="link">Already have an acсount ?
+            <a href="{% url 'users:login' %}" class="span">Sign in</a>
+        </p>
+        {% endblock link %}
+        {% if form.errors %}
+        <div class="form_errors">
+            <ul>
+                {% for field, errors in form.errors.items %}
                 {% for error in errors %}
-                    <li>{{ field }}: {{ error }}</li>
+                <li>{{ field }}: {{ error }}</li>
                 {% endfor %}
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
-            </form>
-
+                {% endfor %}
+            </ul>
         </div>
+        {% endif %}
+        </form>
+
     </div>
-    <script src="{% static 'js/registration.js' %}"></script>
+</div>
+<script src="{% static 'js/registration.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_main_specialty').on('input', function() {
+            var selectedOption = $('option[value="' + $(this).val() + '"]', '#specialties');
+            if (selectedOption.length > 0) {
+                $(this).val(selectedOption.data('id'));
+            }
+        });
+
+        $('#id_locations').on('input', function() {
+            var selectedOption = $('option[value="' + $(this).val() + '"]', '#cityes');
+            if (selectedOption.length > 0) {
+                $(this).val(selectedOption.data('id'));
+            }
+        });
+    });
+</script>
+
 </body>
 {% endblock %}
-
-

@@ -26,16 +26,20 @@ def profile(request):
     return render(request, "users/profile.html", context)
 
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         form = TeacherLoginForm(data=request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
+            print(f"Username: {username}, Password: {password}")  # Отладочный вывод
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                print("User authenticated and logged in successfully.")  # Отладочный вывод
                 return HttpResponseRedirect(reverse('main:main'))
+            else:
+                print("Authentication failed. User not found or password incorrect.")  # Отладочный вывод
     else:
         form = TeacherLoginForm()
 
@@ -46,16 +50,23 @@ def login(request):
 
 
 
-
 def registration(request):
     specializations = Specializations.objects.all()
     locations = Locations.objects.all()
 
     if request.method == 'POST':
+        # pre_form = TeacherRegisterForm(data=request.POST)
+        # pre_form.locations = locations.get(name=request.POST['locations']).id
+        # pre_form.main_specialty = specializations.get(name_spec=request.POST['main_specialty']).id
+        # form = pre_form
+
+
         form = TeacherRegisterForm(data=request.POST)
+
         if form.is_valid():
             form.save()
             return redirect('users:login')
+
     else:
         form = TeacherRegisterForm()
 
