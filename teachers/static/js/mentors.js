@@ -26,3 +26,5 @@ function updateDropdown(displayElementId, value, hiddenInputId) {
           hiddenInput.value = value; // Устанавливаем значение скрытого поля
     }
 }
+
+

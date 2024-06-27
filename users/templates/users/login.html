@@ -11,6 +11,7 @@
     <form method="post" action="{% url "users:login" %}" class="form_group">
         {% csrf_token %}
 
+
         <input class="email_input" type="text" id="id_username" name="username" placeholder="Personal identifier" required>
 
         <div class="password_container">

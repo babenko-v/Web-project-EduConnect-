@@ -22,7 +22,7 @@ class Locations(models.Model):
 class Contact_info(models.Model):
     phone = IntegerField(verbose_name='phone number', blank=True, null=True)
     telegram = models.CharField(max_length=50, unique=True, blank=True, null=True)
-    email = models.CharField(max_length=100, unique=True, blank=True, null=True)
+    email = models.EmailField(max_length=100, unique=True, blank=True, null=True)
     instagram = models.CharField(max_length=50, unique=True, blank=True, null=True)
 
     class Meta:

@@ -104,6 +104,7 @@
 
     <div class="row no-gutters all_teachers">
         {% for info in profiles %}
+            {% if info.is_staff == False %}
             <div class="container col-md-8 mt-4 teacher_card">
                 <div class="mt-4 info_abt">
                     <h2 class="full_name">
@@ -133,6 +134,7 @@
                     <button class="more_inf"><a href="{% url 'teachers:mentors' info.id %}" type="button">More info</a></button>
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
 
         <div class="col-md-4 categ_filt">
