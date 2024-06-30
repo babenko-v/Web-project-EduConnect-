@@ -19,7 +19,6 @@ class TeacherRegisterForm(UserCreationForm):
     first_name = forms.CharField()
     last_name = forms.CharField()
     username = forms.CharField()
-    password = forms.CharField()
     password1 = forms.CharField()
     password2 = forms.CharField()
 
@@ -31,7 +30,6 @@ class TeacherRegisterForm(UserCreationForm):
         fields = ('first_name',
                   'last_name',
                   'username',
-                  'password',
                   'password1',
                   'password2',
                   'locations',

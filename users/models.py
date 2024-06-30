@@ -43,7 +43,6 @@ class Mode_teaching(models.Model):
 
 class Teacher_profile(AbstractUser):
     username = models.CharField(unique=True, max_length=50, verbose_name='identifier')
-    password = models.CharField(max_length=150)
     age = models.IntegerField(null=True, blank=True)
     experience = models.PositiveIntegerField(default=0, null=True, blank=True)
     info_about_teacher = models.TextField(null=True, blank=True)

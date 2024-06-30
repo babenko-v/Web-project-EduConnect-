@@ -55,12 +55,6 @@ def registration(request):
     locations = Locations.objects.all()
 
     if request.method == 'POST':
-        # pre_form = TeacherRegisterForm(data=request.POST)
-        # pre_form.locations = locations.get(name=request.POST['locations']).id
-        # pre_form.main_specialty = specializations.get(name_spec=request.POST['main_specialty']).id
-        # form = pre_form
-
-
         form = TeacherRegisterForm(data=request.POST)
 
         if form.is_valid():
