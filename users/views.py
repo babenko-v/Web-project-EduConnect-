@@ -10,7 +10,7 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm
 
 def profile(request):
     modes = Mode_teaching.objects.all()
-    profiles = Teacher_profile.objects.filter(id=3)
+    profiles = Teacher_profile.objects.filter(id=4)
 
 
 
