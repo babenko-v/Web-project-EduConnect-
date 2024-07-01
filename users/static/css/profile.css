@@ -119,3 +119,9 @@
     transform: translate(160%, -150%);
     padding: 15px 40px;
 }
+
+.choose_sort_btn{
+    font-size: 15px;
+    width: 13.5rem;
+    padding: 4px 0px;
+}

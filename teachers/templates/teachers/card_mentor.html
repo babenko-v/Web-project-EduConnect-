@@ -14,9 +14,9 @@
                 {% block noinfo5 %}
                     {% block noinfo6 %}
                         {% block noinfo7 %}
-
+                            {% block noinfo9 %}
                                 <i>Information not provided</i>
-
+                            {% endblock noinfo9 %}
                         {% endblock noinfo7 %}
                     {% endblock noinfo6 %}
                 {% endblock noinfo5 %}
@@ -26,10 +26,16 @@
 {% endblock noinfo1 %}
 
 {% block noinfo8 %}
-    {% if profiles.contact_info %}
+    {% if profil.contact_info %}
         <i>Information not provided</i>
     {% endif %}
 {% endblock noinfo8 %}
+
+{% block noinfo10 %}
+    {% for first in profiles %}
+        {{ first.first_name }} {{ first.last_name }}
+    {% endfor %}
+{% endblock noinfo10 %}
 
 {% block btn %}
 

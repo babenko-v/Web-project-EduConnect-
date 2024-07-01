@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 
 
@@ -34,3 +34,29 @@ class TeacherRegisterForm(UserCreationForm):
                   'password2',
                   'locations',
                   'main_specialty')
+
+class ProfileUpdateForm(UserChangeForm):
+
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    age = forms.CharField()
+    experience = forms.CharField()
+    info_about_teacher = forms.CharField()
+    work_experience = forms.CharField()
+    other_specialities = forms.CharField()
+    education = forms.CharField()
+
+    locations = forms.ModelChoiceField(queryset=Locations.objects.all())
+
+    class Meta:
+        model = Teacher_profile
+        fields = ('first_name',
+                  'last_name',
+                  'age',
+                  'experience',
+                  'info_about_teacher',
+                  'work_experience',
+                  'other_specialities',
+                  'education',
+                  'locations'
+                  )

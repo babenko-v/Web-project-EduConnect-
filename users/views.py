@@ -5,12 +5,23 @@ from django.urls import reverse
 
 from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
-from users.forms import TeacherLoginForm, TeacherRegisterForm
+from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
 
 def profile(request):
     modes = Mode_teaching.objects.all()
-    profiles = Teacher_profile.objects.filter(id=4)
+    locations = Locations.objects.all()
+    profiles = Teacher_profile.objects.filter(id=5)
+
+    if request.method == 'POST':
+        form = ProfileUpdateForm(data=request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('main:main'))
+
+    else:
+        form = ProfileUpdateForm(instance=request.user)
 
 
 
@@ -20,6 +31,8 @@ def profile(request):
         'modes': modes,
         "profiles": profiles,
         'list_contact': list_conact_info,
+        'locations': locations,
+        'form': form,
 
     }
 
