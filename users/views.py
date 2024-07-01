@@ -1,6 +1,6 @@
 from django.contrib import auth
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from teachers.models import Specializations
@@ -59,7 +59,9 @@ def registration(request):
 
         if form.is_valid():
             form.save()
-            return redirect('users:login')
+            users = form.instance
+            auth.login(request, users)
+            return HttpResponseRedirect(reverse('main:main'))
 
     else:
         form = TeacherRegisterForm()
@@ -71,3 +73,7 @@ def registration(request):
     }
 
     return render(request, "users/registration.html", context=context)
+
+def logout_view(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('main:main'))

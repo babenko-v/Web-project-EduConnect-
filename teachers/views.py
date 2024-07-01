@@ -43,6 +43,9 @@ def roster(request):
     if sort:
         profiles = profiles.order_by(sort)
 
+    profiles_amount = (lambda x: x if x > 0 else 0)(profiles.count() - profiles_admin.count())
+
+
 
     # Пагинация
     paginator = Paginator(profiles, 3)  # Количество элементов на странице
@@ -57,7 +60,7 @@ def roster(request):
         current_page = paginator.page(paginator.num_pages)
 
     context = {
-        'profiles_amount': profiles.count() - profiles_admin.count(),  # Количество профилей, удовлетворяющих фильтрам
+        'profiles_amount': profiles_amount,  # Количество профилей, удовлетворяющих фильтрам
         'profiles': current_page,
         'modes': modes,
         'locality': locality,
