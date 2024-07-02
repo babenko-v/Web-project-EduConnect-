@@ -38,25 +38,30 @@ class TeacherRegisterForm(UserCreationForm):
 class ProfileUpdateForm(UserChangeForm):
 
     first_name = forms.CharField()
+
     last_name = forms.CharField()
-    age = forms.CharField()
-    experience = forms.CharField()
-    info_about_teacher = forms.CharField()
-    work_experience = forms.CharField()
-    other_specialities = forms.CharField()
-    education = forms.CharField()
+    username = forms.CharField(required=False)
+    age = forms.CharField(required=False)
+    experience = forms.CharField(required=False)
+    info_about_teacher = forms.CharField(required=False)
+    work_experience = forms.CharField(required=False)
+    other_specialities = forms.CharField(required=False)
+    education = forms.CharField(required=False)
 
     locations = forms.ModelChoiceField(queryset=Locations.objects.all())
+    main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
 
     class Meta:
         model = Teacher_profile
         fields = ('first_name',
                   'last_name',
+                  'username',
                   'age',
                   'experience',
                   'info_about_teacher',
                   'work_experience',
                   'other_specialities',
                   'education',
-                  'locations'
+                  'locations',
+                  'main_specialty'
                   )

@@ -11,7 +11,8 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 def profile(request):
     modes = Mode_teaching.objects.all()
     locations = Locations.objects.all()
-    profiles = Teacher_profile.objects.filter(id=5)
+
+    specializations = Specializations.objects.all()
 
     if request.method == 'POST':
         form = ProfileUpdateForm(data=request.POST, instance=request.user)
@@ -29,10 +30,11 @@ def profile(request):
 
     context = {
         'modes': modes,
-        "profiles": profiles,
+
         'list_contact': list_conact_info,
         'locations': locations,
         'form': form,
+        'specializations': specializations
 
     }
 

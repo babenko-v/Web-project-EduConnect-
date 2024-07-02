@@ -14,33 +14,37 @@
             <div class="profile-picture"></div>
             <div class="profile-info">
 
-                {% for info in profiles %}
+
                     <h1>
                         {% block noinfo10 %}
                             <input
                                     name="first_name" id="id_first_name"
-                                    class="add_info p-2"
-                                    value="{{ form.first_name.value }}">
+                                    class="add_info p-2" value="{{ form.first_name.value }}">
                             <input
                                     name="last_name" id="id_last_name"
-                                    class="add_info p-2"
-                                    value="{{ form.last_name.value }}">
+                                    class="add_info p-2" value="{{ form.last_name.value }}">
                         {% endblock noinfo10 %}
                     </h1>
 
                     <h2>
                         {% block spec %}
-                            {{ info.main_specialty }} Teacher
+                            {% for specialization in specializations %}
+                                {% if specialization.id == form.main_specialty.value %}
+                                    {{ specialization.name_spec }} Teacher
+                                {% endif %}
+                            {% endfor %}
                         {% endblock spec %}
                     </h2>
+                    <input type="hidden" name="main_specialty" id="id_main_specialty" value="{{ form.main_specialty.value }}">
 
                     <div class="contact-info">
                         <div>
                             <strong class="header_prof">Age</strong>
                             {% block noinfo1 %}
                                 <input class="add_info"
+                                       value="{{ form.age.value }}"
                                        name="age" id="id_age"
-                                       value="{{ form.age.value }}" type="text" placeholder="Enter your age">
+                                       type="text" placeholder="Enter your age">
                             {% endblock noinfo1 %}
                         </div>
 
@@ -53,14 +57,13 @@
                                        name="experience" id="id_experience"
                                        type="text" placeholder="Enter your experience">
                             {% endblock noinfo2 %}
-
                         </div>
 
                         <div>
                             <strong class="header_prof">Mode of Teaching</strong>
 
                             {% if info.mode_teaching %}
-                                {{ form.mode_teaching.value }}
+                                {{ info.mode_teaching }}
                             {% else %}
                                 {% block noinfo3 %}
                                     <div class="dropdown d-inline-block me-2">
@@ -70,19 +73,15 @@
                                         </button>
 
                                         <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
-
                                             {% for mode in modes %}
-
                                                 <li><a class="dropdown-item" href="#"
                                                        onclick="updateDropdown('experienceDropdown', '{{ mode.name_mode }} studying')">{{ mode.name_mode }}
                                                     studying</a></li>
-
                                             {% endfor %}
                                         </ul>
                                     </div>
                                 {% endblock noinfo3 %}
                             {% endif %}
-
                         </div>
 
                         <div class="location_info">
@@ -101,8 +100,8 @@
                                 </datalist>
                             {% endblock noinfo9 %}
                         </div>
-                    </div>
-                    </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="profile-content">
@@ -111,7 +110,6 @@
                             <strong class="header_prof">Info about you</strong>
                         </h3>
 
-
                         {% block noinfo4 %}
                             <input class="fixed-textarea"
                                    id="id_info_about_teacher" name="info_about_teacher"
@@ -119,13 +117,9 @@
                                    placeholder="Enter detailed information about you">
                         {% endblock noinfo4 %}
 
-
-
                         <h3>
                             <strong class="header_prof">Work Experience</strong>
                         </h3>
-
-
 
                         {% block noinfo5 %}
                             <input class="fixed-textarea"
@@ -134,12 +128,9 @@
                                    placeholder="Enter detailed information about you">
                         {% endblock noinfo5 %}
 
-
-
                         <h3>
                             <strong class="header_prof">Other specialization</strong>
                         </h3>
-
 
                         {% block noinfo6 %}
                             <input class="fixed-textarea"
@@ -147,21 +138,19 @@
                                    value="{{ form.other_specialities.value }}"
                                    placeholder="Enter detailed information about you">
                         {% endblock noinfo6 %}
-
                     </div>
                     <div class="contact-details">
                         <h3>
                             <strong class="header_prof">Contact Information</strong>
                         </h3>
 
-                        <p><strong>Personal identifier:</strong> {{ info.username }}</p>
+                        <p><strong>Personal identifier:</strong> {{ form.username.value }}</p>
+                        <input type="hidden" name="username" id="id_username" value="{{ form.username.value }}">
 
                         {% for cont_info in list_contact %}
-
                             {% with value=info.contact_info|get_attr:cont_info %}
                                 {% if value %}
                                     <p><strong>{{ cont_info|title }}:</strong> {{ value }}</p>
-
                                 {% else %}
                                     {% block noinfo8 %}
                                         <input class="contact_input_info" type="text"
@@ -169,13 +158,11 @@
                                     {% endblock noinfo8 %}
                                 {% endif %}
                             {% endwith %}
-
                         {% endfor %}
 
                         <h3>
                             <strong class="header_prof">Education</strong>
                         </h3>
-
 
                         {% block noinfo7 %}
                             <input class="fixed-textarea"
@@ -184,7 +171,7 @@
                                    placeholder="Enter detailed information about you">
                         {% endblock noinfo7 %}
                     </div>
-                {% endfor %}
+
 
                 </div>
         {% block btn %}
@@ -192,16 +179,17 @@
                 <button type="submit" class="btn btn-outline-success confirm_info">Confirm</button>
             {% endif %}
         {% endblock btn %}
-
-    <div class="form_errors">
+        {% if form.errors %}
+            <div class="form_errors">
                 <ul>
                     {% for field, errors in form.errors.items %}
-                    {% for error in errors %}
-                    <li>{{ field }}: {{ error }}</li>
-                    {% endfor %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
                 </ul>
             </div>
+        {% endif %}
     </form>
 
     </body>
