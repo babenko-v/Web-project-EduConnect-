@@ -10,6 +10,23 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
 def profile(request):
     modes = Mode_teaching.objects.all()
+    profiles = Teacher_profile.objects.filter(id=7)
+
+
+
+    list_conact_info = ('phone', 'telegram', 'email', 'instagram')
+
+    context = {
+        'modes': modes,
+        "profiles": profiles,
+        'list_contact': list_conact_info,
+
+    }
+
+    return render(request, "users/profile.html", context)
+
+def change_profile(request):
+    modes = Mode_teaching.objects.all()
     locations = Locations.objects.all()
 
     specializations = Specializations.objects.all()
@@ -24,8 +41,6 @@ def profile(request):
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-
-
     list_conact_info = ('phone', 'telegram', 'email', 'instagram')
 
     context = {
@@ -38,7 +53,7 @@ def profile(request):
 
     }
 
-    return render(request, "users/profile.html", context)
+    return render(request, 'users/change_profile.html', context)
 
 
 def login_view(request):

@@ -75,6 +75,7 @@ def mentors(request, mentors_id):
     list_conact_info = ('phone', 'telegram', 'facebook', 'instagram')
 
 
+
     context = {
         "profiles": profiles,
         'list_contact': list_conact_info
