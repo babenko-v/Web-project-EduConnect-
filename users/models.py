@@ -53,7 +53,7 @@ class Teacher_profile(AbstractUser):
     locations = models.ForeignKey(to=Locations, blank=True, null=True, on_delete=models.PROTECT)
     main_specialty = models.ForeignKey(to=Specializations, blank=True, null=True, on_delete=models.PROTECT)
     contact_info = models.OneToOneField(to=Contact_info, blank=True, null=True,  on_delete=models.PROTECT)
-    mode_teaching = models.ForeignKey(to=Mode_teaching, blank=True, null=True, on_delete=models.PROTECT)
+    mode_teaching = models.ForeignKey(to=Mode_teaching, blank=True, null=True, on_delete=models.PROTECT, default=1)
 
     image = models.ImageField(upload_to='users_images', blank=True, null=True, verbose_name='profile_image')
 

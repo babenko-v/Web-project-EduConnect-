@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django import forms
 
 
-from users.models import Teacher_profile, Locations
+from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
 
 
@@ -50,6 +50,7 @@ class ProfileUpdateForm(UserChangeForm):
 
     locations = forms.ModelChoiceField(queryset=Locations.objects.all())
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
+    mode_teaching = forms.ModelChoiceField(queryset=Mode_teaching.objects.all(), required=False)
 
     class Meta:
         model = Teacher_profile
@@ -63,5 +64,6 @@ class ProfileUpdateForm(UserChangeForm):
                   'other_specialities',
                   'education',
                   'locations',
-                  'main_specialty'
+                  'main_specialty',
+                  'mode_teaching'
                   )
