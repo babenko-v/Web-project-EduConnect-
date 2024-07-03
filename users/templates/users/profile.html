@@ -94,15 +94,13 @@
 
                                     <p><strong>Personal identifier:</strong> {{ info.username }}</p>
 
-                                    {% for cont_info in list_contact %}
+                                    {% if info.email %}
+                                        <p><strong>Email:</strong> {{ info.email }}</p>
+                                    {% endif %}
 
-                                        {% with value=info.contact_info|get_attr:cont_info %}
-                                            {% if value %}
-                                                <p><strong>{{ cont_info|title }}:</strong> {{ value }}</p>
-                                            {% endif %}
-                                        {% endwith %}
-
-                                    {% endfor %}
+                                    {% if info.phone %}
+                                        <p><strong>Phone number:</strong> {{ info.phone }}</p>
+                                    {% endif %}
 
                                 <h3>
                                     <strong class="header_prof">Education</strong>

@@ -74,12 +74,8 @@ def roster(request):
 
 def mentors(request, mentors_id):
     profiles = Teacher_profile.objects.filter(id=mentors_id)
-    list_conact_info = ('phone', 'telegram', 'facebook', 'instagram')
-
-
 
     context = {
         "profiles": profiles,
-        'list_contact': list_conact_info
     }
     return render(request, "teachers/card_mentor.html", context=context)

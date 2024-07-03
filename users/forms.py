@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 
-
 from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
 
@@ -38,9 +37,10 @@ class TeacherRegisterForm(UserCreationForm):
 class ProfileUpdateForm(UserChangeForm):
 
     first_name = forms.CharField()
-
     last_name = forms.CharField()
     username = forms.CharField(required=False)
+    phone = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
     age = forms.CharField(required=False)
     experience = forms.CharField(required=False)
     info_about_teacher = forms.CharField(required=False)
@@ -65,5 +65,7 @@ class ProfileUpdateForm(UserChangeForm):
                   'education',
                   'locations',
                   'main_specialty',
-                  'mode_teaching'
+                  'mode_teaching',
+                  'phone',
+                  'email'
                   )

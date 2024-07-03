@@ -9,18 +9,10 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
 
 def profile(request):
-    modes = Mode_teaching.objects.all()
-    profiles = Teacher_profile.objects.filter(id=7)
-
-
-
-    list_conact_info = ('phone', 'telegram', 'email', 'instagram')
+    profiles = Teacher_profile.objects.filter(id=2)
 
     context = {
-        'modes': modes,
         "profiles": profiles,
-        'list_contact': list_conact_info,
-
     }
 
     return render(request, "users/profile.html", context)
@@ -36,21 +28,18 @@ def change_profile(request):
 
         if form.is_valid():
             form.save()
+
             return HttpResponseRedirect(reverse('main:main'))
 
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-    list_conact_info = ('phone', 'telegram', 'email', 'instagram')
 
     context = {
         'modes': modes,
-
-        'list_contact': list_conact_info,
         'locations': locations,
         'form': form,
         'specializations': specializations
-
     }
 
     return render(request, 'users/change_profile.html', context)

@@ -138,18 +138,21 @@
                         <p><strong>Personal identifier:</strong> {{ form.username.value }}</p>
                         <input type="hidden" name="username" id="id_username" value="{{ form.username.value }}">
 
-                        {% for cont_info in list_contact %}
-                            {% with value=info.contact_info|get_attr:cont_info %}
-                                {% if value %}
-                                    <p><strong>{{ cont_info|title }}:</strong> {{ value }}</p>
-                                {% else %}
-                                    {% block noinfo8 %}
-                                        <input class="contact_input_info" type="text"
-                                               placeholder="Enter your {{ cont_info }}">
-                                    {% endblock noinfo8 %}
-                                {% endif %}
-                            {% endwith %}
-                        {% endfor %}
+                                    <div>
+                                        <input class="contact_input_info"
+                                               id="id_email" name="email"
+                                               value="{{ form.email.value }}"
+                                               type="email"
+                                               placeholder="Enter your email">
+                                    </div>
+
+                                    <div>
+                                        <input class="contact_input_info"
+                                               id="id_phone" name="phone"
+                                               value="{{ form.phone.value }}"
+                                               type="text"
+                                               placeholder="Enter your phone number">
+                                    </div>
 
                         <h3>
                             <strong class="header_prof">Education</strong>
@@ -170,6 +173,7 @@
                 <button type="submit" class="btn btn-outline-success confirm_info">Confirm</button>
 
         {% endblock btn %}
+
         {% if form.errors %}
             <div class="form_errors">
                 <ul>
@@ -182,7 +186,6 @@
             </div>
         {% endif %}
     </form>
-
     </body>
     <script src="{% static 'js/mentors.js' %}"></script>
 {% endblock %}
