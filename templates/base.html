@@ -34,10 +34,20 @@
             </button>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                <li><a class="dropdown-item" href="{% url 'users:profile' %}">My profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'users:registration' %}">Create a new account</a></li>
-                <li><a class="dropdown-item" href="{% url 'users:login' %}">Log in</a></li>
-                <li><a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a></li>
+
+                {% if not user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'users:login' %}">Log in</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'users:profile' %}">My profile</a></li>
+                    {% if user.is_admin or user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                    {% endif %}
+                    <li><a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a></li>
+                {% endif %}
+
+
+
             </ul>
         </div>
 

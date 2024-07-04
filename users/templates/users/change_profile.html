@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load filters_profile %}
 
@@ -42,7 +42,7 @@
                             <strong class="header_prof">Age</strong>
 
                                 <input class="add_info"
-                                       value="{{ form.age.value }}"
+                                       value="{% if form.age.value  %}{{ form.age.value }}{% endif %}"
                                        name="age" id="id_age"
                                        type="text" placeholder="Enter your age">
 
@@ -53,7 +53,7 @@
 
 
                                 <input class="add_info"
-                                       value="{{ form.experience.value }}"
+                                       value="{% if form.experience.value  %}{{ form.experience.value }}{% endif %}"
                                        name="experience" id="id_experience"
                                        type="text" placeholder="Enter your experience">
 
@@ -66,7 +66,7 @@
                                        id="id_mode_teaching" name="mode_teaching"
                                        class="add_info"
                                        placeholder="Enter the type of teaching"
-                                       value="{{ form.mode_teaching.value }}">
+                                       value="{% if form.mode_teaching.value  %}{{ form.mode_teaching.value }}{% endif %}">
 
                                 <datalist id="cityes">
                                     {% for type in modes %}
@@ -104,7 +104,7 @@
 
                             <input class="fixed-textarea"
                                    id="id_info_about_teacher" name="info_about_teacher"
-                                   value="{{ form.info_about_teacher.value }}"
+                                   value="{% if form.info_about_teacher.value  %}{{ form.info_about_teacher.value }}{% endif %}"
                                    placeholder="Enter detailed information about you">
 
 
@@ -115,7 +115,7 @@
 
                             <input class="fixed-textarea"
                                    id="id_work_experience" name="work_experience"
-                                   value="{{ form.work_experience.value }}"
+                                   value="{% if form.work_experience.value  %}{{ form.work_experience.value }}{% endif %}"
                                    placeholder="Enter detailed information about you">
 
 
@@ -126,7 +126,7 @@
 
                             <input class="fixed-textarea"
                                    id="id_other_specialities" name="other_specialities"
-                                   value="{{ form.other_specialities.value }}"
+                                   value="{% if form.other_specialities.value  %}{{ form.other_specialities.value }}{% endif %}"
                                    placeholder="Enter detailed information about you">
 
                     </div>
@@ -141,7 +141,7 @@
                                     <div>
                                         <input class="contact_input_info"
                                                id="id_email" name="email"
-                                               value="{{ form.email.value }}"
+                                               value="{% if form.email.value  %}{{ form.email.value }}{% endif %}"
                                                type="email"
                                                placeholder="Enter your email">
                                     </div>
@@ -149,7 +149,7 @@
                                     <div>
                                         <input class="contact_input_info"
                                                id="id_phone" name="phone"
-                                               value="{{ form.phone.value }}"
+                                               value="{% if form.phone.value  %}{{ form.phone.value }}{% endif %}"
                                                type="text"
                                                placeholder="Enter your phone number">
                                     </div>
@@ -161,7 +161,7 @@
 
                             <input class="fixed-textarea"
                                    id="id_education" name="education"
-                                   value="{{ form.education.value }}"
+                                   value="{% if form.education.value  %}{{ form.education.value }}{% endif %}"
                                    placeholder="Enter detailed information about you">
 
                     </div>

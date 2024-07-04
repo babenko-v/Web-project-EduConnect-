@@ -9,7 +9,7 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
 
 def profile(request):
-    profiles = Teacher_profile.objects.filter(id=2)
+    profiles = Teacher_profile.objects.filter(id=3)
 
     context = {
         "profiles": profiles,
