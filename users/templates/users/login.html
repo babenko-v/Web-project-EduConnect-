@@ -10,6 +10,10 @@
 <form method="post" action="{% url "users:login" %}" class="form_group">
     {% csrf_token %}
 
+    {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+    {% endif %}
+
     <input class="email_input" type="text" id="id_username" name="username" placeholder="Personal identifier" required>
 
     <div class="password_container">

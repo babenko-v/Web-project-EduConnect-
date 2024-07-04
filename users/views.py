@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -7,9 +8,9 @@ from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
 from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
-
+@login_required
 def profile(request):
-    profiles = Teacher_profile.objects.filter(id=3)
+    profiles = Teacher_profile.objects.filter(id=2)
 
     context = {
         "profiles": profiles,
@@ -17,6 +18,7 @@ def profile(request):
 
     return render(request, "users/profile.html", context)
 
+@login_required
 def change_profile(request):
     modes = Mode_teaching.objects.all()
     locations = Locations.objects.all()
@@ -56,6 +58,9 @@ def login_view(request):
             if user:
                 auth.login(request, user)
                 print("User authenticated and logged in successfully.")  # Отладочный вывод
+
+                if request.POST.get('next', None):
+                    return HttpResponseRedirect(request.POST.get('next'))
                 return HttpResponseRedirect(reverse('main:main'))
             else:
                 print("Authentication failed. User not found or password incorrect.")  # Отладочный вывод
@@ -93,6 +98,7 @@ def registration(request):
 
     return render(request, "users/registration.html", context=context)
 
+@login_required
 def logout_view(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:main'))

@@ -24,9 +24,9 @@ class Mode_teaching(models.Model):
 
 class Teacher_profile(AbstractUser):
     username = models.CharField(unique=True, max_length=50, verbose_name='identifier')
-    age = models.IntegerField(null=True, blank=True)
-    experience = models.PositiveIntegerField(default=0, null=True, blank=True)
-    phone = models.IntegerField(verbose_name='phone number', blank=True, null=True)
+    age = models.CharField( null=True, blank=True)
+    experience = models.CharField(null=True, blank=True)
+    phone = models.CharField(verbose_name='phone number', blank=True, null=True)
 
     info_about_teacher = models.TextField(null=True, blank=True)
     work_experience = models.TextField(null=True, blank=True)
