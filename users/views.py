@@ -10,7 +10,7 @@ from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
 
 @login_required
 def profile(request):
-    profiles = Teacher_profile.objects.filter(id=2)
+    profiles = Teacher_profile.objects.filter(id=request.user.id)
 
     context = {
         "profiles": profiles,
@@ -59,7 +59,9 @@ def login_view(request):
                 auth.login(request, user)
                 print("User authenticated and logged in successfully.")  # Отладочный вывод
 
-                if request.POST.get('next', None):
+                redirect_page = request.POST.get('next', None)
+
+                if redirect_page and redirect_page != reverse('users:logout'):
                     return HttpResponseRedirect(request.POST.get('next'))
                 return HttpResponseRedirect(reverse('main:main'))
             else:
