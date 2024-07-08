@@ -85,6 +85,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1rem;
+    margin-left: 9.125rem;
     width: 50%;
     text-transform: uppercase;
     font-weight: bold;
@@ -93,12 +94,6 @@ h2 {
 
 .register_button:hover {
     background-color: #654321;
-}
-
-.register_button:hover ~ .decor_before, .register_button:hover ~ .decor_after {
-    transition: 0.4s;
-    background: #25cb41;
-    border: 15px solid #46fc52;
 }
 
 .decor_before {
@@ -121,6 +116,16 @@ h2 {
     border-radius: 50%;
 }
 
+
+
+.decor_container .register_button:hover ~ .decor_before,
+.decor_container .register_button:hover ~ .decor_after {
+    transition: 0.4s;
+    border: 15px solid #46fc52 !important;
+    background: #25cb41 !important;
+}
+
+
 .link {
   text-align: center;
   color: black;
@@ -131,3 +136,31 @@ h2 {
       color: blue;
   }
 }
+
+.warning {
+    font-size: 15px;
+    max-width: 500px;
+    list-style-type: none;
+    padding: 10px;
+
+    & ul.errorlist {
+        width: 300px;
+        background-color: rgb(255, 102, 68);
+        margin-left: 20px;
+        border-radius: 20px;
+        padding: 10px;
+    }
+}
+.right_errors_block {
+    position: absolute;
+    left: 650px;
+    top: 90px;
+}
+
+.left_errors_block  {
+    position: absolute;
+    left: -350px;
+    top: 90px;
+}
+
+
