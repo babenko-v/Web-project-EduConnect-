@@ -89,7 +89,7 @@
                     {% endif %}
 
                     {% if form.main_specialty.errors %}
-                        <div class="warning">{{form.main_specialty.errors}}</div>
+                        <div class="warning_id">Select one of the suggested values in the speciality field.</div>
                     {% endif %}
                 </div>
 
@@ -99,11 +99,11 @@
                     {% endif %}
 
                     {% if form.username.errors %}
-                        <div class="warning_id">A profile with this personal identifier already exists</div>
+                        <div class="warning_id">A profile with this personal identifier already exists.</div>
                     {% endif %}
 
                     {% if form.locations.errors %}
-                        <div class="warning">{{form.locations.errors}}</div>
+                        <div class="warning_id">Select one of the suggested values in the location field.</div>
                     {% endif %}
                 </div>
             </div>

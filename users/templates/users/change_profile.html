@@ -62,13 +62,13 @@
                         <div>
                             <strong class="header_prof">Mode of Teaching</strong>
 
-                            <input type="text" list="cityes"
+                            <input type="text" list="type_teaching"
                                        id="id_mode_teaching" name="mode_teaching"
                                        class="add_info"
                                        placeholder="Enter the type of teaching"
                                        value="{% if form.mode_teaching.value  %}{{ form.mode_teaching.value }}{% endif %}">
 
-                                <datalist id="cityes">
+                                <datalist id="type_teaching">
                                     {% for type in modes %}
                                         <option value="{{ type.id }}">{{ type.name_mode }}</option>
                                     {% endfor %}
@@ -173,17 +173,55 @@
 
         {% endblock btn %}
 
-        {% if form.errors %}
-            <div class="form_errors">
-                <ul>
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <li>{{ field }}: {{ error }}</li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
+{#        {% if form.errors %}#}
+{#            <div class="form_errors">#}
+{#                <ul>#}
+{#                    {% for field, errors in form.errors.items %}#}
+{#                        {% for error in errors %}#}
+{#                            <li>{{ field }}: {{ error }}</li>#}
+{#                        {% endfor %}#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        {% endif %}#}
+
+        <div class="errors_change">
+            <div class="left_errors_block">
+                {% if form.first_name.errors %}
+                    <div class="warning">{{form.first_name.errors}}</div>
+                {% endif %}
+
+                {% if form.last_name.errors %}
+                    <div class="warning">{{form.last_name.errors}}</div>
+                {% endif %}
+
+                {% if form.age.errors %}
+                    <div class="warning">{{form.age.errors}}</div>
+                {% endif %}
+
+                {% if form.mode_teaching.errors %}
+                    <div class="warning_id">Select one of the suggested values in the type of teaching field.</div>
+                {% endif %}
             </div>
-        {% endif %}
+
+            <div class="right_errors_block">
+                {% if form.locations.errors %}
+                    <div class="warning_id">Select one of the suggested values in the location field.</div>
+                {% endif %}
+
+                {% if form.experience.errors %}
+                    <div class="warning">{{form.experience.errors}}</div>
+                {% endif %}
+
+                {% if form.phone.errors %}
+                    <div class="warning">{{form.phone.errors}}</div>
+                {% endif %}
+
+                {% if form.email.errors %}
+                    <div class="warning">{{form.email.errors}}</div>
+                {% endif %}
+            </div>
+        </div>
     </form>
     </body>
     <script src="{% static 'js/mentors.js' %}"></script>
