@@ -67,6 +67,9 @@
                 <div class="decor_after" {% if form.errors %}style="background: #ff0000; border: 15px solid #c41e32;" {% endif %}></div>
             </div>
 
+
+
+
             {% endblock login %}
 
             {% block link %}
@@ -78,7 +81,7 @@
             <div class="block_errors">
                 <div class="right_errors_block">
                     {% if form.last_name.errors %}
-                         <span class="warning">{{form.last_name.errors}}</span>
+                         <div class="warning">{{form.last_name.errors}}</div>
                     {% endif %}
 
                     {% if form.password2.errors %}
@@ -92,15 +95,15 @@
 
                 <div class="left_errors_block">
                     {% if form.first_name.errors %}
-                        <span class="warning">{{form.first_name.errors}}</span>
+                        <div class="warning">{{form.first_name.errors}}</div>
                     {% endif %}
 
                     {% if form.username.errors %}
-                        <span class="warning">{{form.username.errors}}</span>
+                        <div class="warning_id">A profile with this personal identifier already exists</div>
                     {% endif %}
 
                     {% if form.locations.errors %}
-                        <span class="warning">{{form.locations.errors}}</span>
+                        <div class="warning">{{form.locations.errors}}</div>
                     {% endif %}
                 </div>
             </div>

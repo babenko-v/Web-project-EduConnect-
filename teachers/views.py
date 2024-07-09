@@ -17,10 +17,7 @@ def roster(request):
     query = request.GET.get('q')
 
     profiles = Teacher_profile.objects.all()
-    profiles_count = profiles.count()
-
-    profiles_admin = Teacher_profile.objects.all()
-    profiles_admin = profiles_admin.exclude(is_staff=False)
+    profiles = profiles.exclude(is_staff=True)
 
     type_std = request.GET.get('type_std')
     speciality = request.GET.get('speciality')
@@ -44,11 +41,6 @@ def roster(request):
     if sort:
         profiles = profiles.order_by(sort)
 
-    if profiles.count() == profiles_count:
-        profiles_amount = (lambda x: x if x > 0 else 0)(profiles.count() - profiles_admin.count())
-    else:
-        profiles_amount = profiles.count()
-
     # Пагинация
     paginator = Paginator(profiles, 3)  # Количество элементов на странице
     page_number = request.GET.get('page', 1)
@@ -62,7 +54,7 @@ def roster(request):
         current_page = paginator.page(paginator.num_pages)
 
     context = {
-        'profiles_amount': profiles_amount,  # Количество профилей, удовлетворяющих фильтрам
+        'profiles_amount': profiles.count(),  # Количество профилей, удовлетворяющих фильтрам
         'profiles': current_page,
         'modes': modes,
         'locality': locality,

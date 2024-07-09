@@ -143,6 +143,10 @@ h2 {
     list-style-type: none;
     padding: 10px;
 
+    & li {
+        list-style-type: none;
+    }
+
     & ul.errorlist {
         width: 300px;
         background-color: rgb(255, 102, 68);
@@ -163,4 +167,13 @@ h2 {
     top: 90px;
 }
 
+.warning_id {
+    font-size: 15px;
+    width: 300px;
+    background-color: rgb(255, 102, 68);
+    margin-left: 30px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 
