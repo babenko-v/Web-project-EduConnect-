@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -30,6 +30,7 @@ def change_profile(request):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "You have successfully change info into your account.")
 
             return HttpResponseRedirect(reverse('main:main'))
 
@@ -61,11 +62,14 @@ def login_view(request):
 
                 redirect_page = request.POST.get('next', None)
 
+                messages.success(request, "You are now logged in.")
+
                 if redirect_page and redirect_page != reverse('users:logout'):
                     return HttpResponseRedirect(request.POST.get('next'))
                 return HttpResponseRedirect(reverse('main:main'))
             else:
                 print("Authentication failed. User not found or password incorrect.")  # Отладочный вывод
+                messages.success(request, "You aren't now logged in.")
     else:
         form = TeacherLoginForm()
 
@@ -87,6 +91,7 @@ def registration(request):
             form.save()
             users = form.instance
             auth.login(request, users)
+            messages.success(request, "You have successfully registered and logged into your account.")
             return HttpResponseRedirect(reverse('main:main'))
 
     else:
@@ -102,5 +107,7 @@ def registration(request):
 
 @login_required
 def logout_view(request):
+    messages.success(request, "You have successfully log out your account.")
     auth.logout(request)
+
     return HttpResponseRedirect(reverse('main:main'))
