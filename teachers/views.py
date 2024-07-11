@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
+from django.views.generic import DetailView
 
 from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
@@ -64,10 +64,20 @@ def roster(request):
 
     return render(request, "teachers/roster_mentors.html", context)
 
-def mentors(request, mentors_id):
-    profiles = Teacher_profile.objects.filter(id=mentors_id)
+# def mentors(request, mentors_id):
+#     profiles = Teacher_profile.objects.filter(id=mentors_id)
+#
+#     context = {
+#         "profiles": profiles,
+#     }
+#     return render(request, "teachers/card_mentor.html", context=context)
 
-    context = {
-        "profiles": profiles,
-    }
-    return render(request, "teachers/card_mentor.html", context=context)
+class MentorView(DetailView):
+
+    template_name = 'teachers/card_mentor.html'
+    pk_url_kwarg = 'mentors_id'
+    context_object_name = 'profiles'
+
+    def get_object(self, **kwargs):
+        profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
+        return profiles
