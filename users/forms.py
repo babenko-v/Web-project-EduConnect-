@@ -1,8 +1,12 @@
+import re
+
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
+from django.core.exceptions import ValidationError
 
 from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
+from users.utils import numeric_validator, fullname_validator
 
 
 class TeacherLoginForm(forms.Form):
@@ -15,8 +19,8 @@ class TeacherLoginForm(forms.Form):
         fields = ('username', 'password')
 
 class TeacherRegisterForm(UserCreationForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    first_name = forms.CharField(validators=[fullname_validator])
+    last_name = forms.CharField(validators=[fullname_validator])
     username = forms.CharField()
     password1 = forms.CharField()
     password2 = forms.CharField()
@@ -34,15 +38,16 @@ class TeacherRegisterForm(UserCreationForm):
                   'locations',
                   'main_specialty')
 
+
 class ProfileUpdateForm(UserChangeForm):
 
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    first_name = forms.CharField(validators=[fullname_validator])
+    last_name = forms.CharField(validators=[fullname_validator])
     username = forms.CharField(required=False)
     phone = forms.CharField(required=False)
     email = forms.EmailField(required=False)
-    age = forms.CharField(required=False)
-    experience = forms.CharField(required=False)
+    age = forms.CharField(required=False, validators=[numeric_validator])
+    experience = forms.CharField(required=False, validators=[numeric_validator])
     info_about_teacher = forms.CharField(required=False)
     work_experience = forms.CharField(required=False)
     other_specialities = forms.CharField(required=False)
@@ -51,6 +56,25 @@ class ProfileUpdateForm(UserChangeForm):
     locations = forms.ModelChoiceField(queryset=Locations.objects.all())
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
     mode_teaching = forms.ModelChoiceField(queryset=Mode_teaching.objects.all(), required=False)
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+
+        if not data.isdigit():
+            raise forms.ValidationError("The phone number must contain only digits")
+
+        pattern = re.compile(r'^\d{10}$')
+        if not pattern.match(data):
+            raise forms.ValidationError("The phone number must be 10 digits long")
+
+        return data
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not re.match(r'^[a-zA-Z0-9._%+-]+@gmail\.com$', email):
+            raise ValidationError("The email must include @gmail.com and be in English.")
+        return email
+
+
 
     class Meta:
         model = Teacher_profile
@@ -69,3 +93,5 @@ class ProfileUpdateForm(UserChangeForm):
                   'phone',
                   'email'
                   )
+
+
