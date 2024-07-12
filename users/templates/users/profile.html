@@ -33,31 +33,23 @@
                                 <div class="contact-info">
                                     <div>
                                         <strong class="header_prof">Age</strong>
-
                                             {{ info.age|default_no_info }}
-
                                     </div>
 
                                     <div>
                                         <strong class="header_prof">Experience</strong>
-
                                             {{ info.experience|default_no_info }}
-
                                     </div>
 
                                     <div>
                                         <strong class="header_prof">Mode of Teaching</strong>
-
                                             {{ info.mode_teaching|default_no_info }}
-
                                     </div>
 
                                 <div class="location_info">
+
                             <strong class="header_prof">Location</strong>
-
                                     {{ info.locations|default_no_info }}
-
-
 
                         </div>
                                 </div>
@@ -76,17 +68,13 @@
                                 <h3>
                                     <strong class="header_prof">Work Experience</strong>
                                 </h3>
-
-
                                     {{ info.work_experience|default_no_info }}
-
-
                                 <h3>
                                     <strong class="header_prof">Other specialization</strong>
                                 </h3>
-
                                     {{ info.other_specialities|default_no_info }}
                             </div>
+
                             <div class="contact-details">
                                 <h3>
                                     <strong class="header_prof">Contact Information</strong>
@@ -109,9 +97,7 @@
                                {{ info.education|default_no_info }}
                             </div>
                     {% endfor %}
-
                     </div>
-
         </div>
     </body>
     <script src="{% static 'js/mentors.js' %}"></script>
