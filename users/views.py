@@ -1,12 +1,14 @@
 from django.contrib import auth, messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
-from users.forms import TeacherLoginForm, TeacherRegisterForm, ProfileUpdateForm
+from users.forms import TeacherRegisterForm, ProfileUpdateForm
 
 @login_required
 def profile(request):
@@ -47,36 +49,47 @@ def change_profile(request):
 
     return render(request, 'users/change_profile.html', context)
 
+class UserLoginView(LoginView):
+    template_name = 'users/login.html'
+    form_class = AuthenticationForm
 
-def login_view(request):
-    if request.method == 'POST':
-        form = TeacherLoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            print(f"Username: {username}, Password: {password}")  # Отладочный вывод
-            user = auth.authenticate(username=username, password=password)
-            if user:
-                auth.login(request, user)
-                print("User authenticated and logged in successfully.")  # Отладочный вывод
 
-                redirect_page = request.POST.get('next', None)
+    def get_success_url(self):
+        messages.success(self.request, "You are now logged in.")
+        redirect_page = self.request.POST.get('next', None)
+        if redirect_page and redirect_page != reverse('users:logout'):
+            return redirect_page
+        return reverse_lazy('main:main')
 
-                messages.success(request, "You are now logged in.")
-
-                if redirect_page and redirect_page != reverse('users:logout'):
-                    return HttpResponseRedirect(request.POST.get('next'))
-                return HttpResponseRedirect(reverse('main:main'))
-            else:
-                print("Authentication failed. User not found or password incorrect.")  # Отладочный вывод
-                messages.success(request, "You aren't now logged in.")
-    else:
-        form = TeacherLoginForm()
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'users/login.html', context)
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = TeacherLoginForm(data=request.POST)
+#         if form.is_valid():
+#             username = request.POST['username']
+#             password = request.POST['password']
+#             print(f"Username: {username}, Password: {password}")  # Отладочный вывод
+#             user = auth.authenticate(username=username, password=password)
+#             if user:
+#                 auth.login(request, user)
+#                 print("User authenticated and logged in successfully.")  # Отладочный вывод
+#
+#                 redirect_page = request.POST.get('next', None)
+#
+#                 messages.success(request, "You are now logged in.")
+#
+#                 if redirect_page and redirect_page != reverse('users:logout'):
+#                     return HttpResponseRedirect(request.POST.get('next'))
+#                 return HttpResponseRedirect(reverse('main:main'))
+#             else:
+#                 print("Authentication failed. User not found or password incorrect.")  # Отладочный вывод
+#                 messages.success(request, "You aren't now logged in.")
+#     else:
+#         form = TeacherLoginForm()
+#
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'users/login.html', context)
 
 
 

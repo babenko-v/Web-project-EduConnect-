@@ -8,16 +8,6 @@ from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
 from users.utils import numeric_validator, fullname_validator
 
-
-class TeacherLoginForm(forms.Form):
-
-    username = forms.CharField()
-    password = forms.CharField()
-
-    class Meta:
-        model = Teacher_profile
-        fields = ('username', 'password')
-
 class TeacherRegisterForm(UserCreationForm):
     first_name = forms.CharField(validators=[fullname_validator])
     last_name = forms.CharField(validators=[fullname_validator])

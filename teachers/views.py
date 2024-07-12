@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from django.views.generic import DetailView, ListView
 
 from teachers.models import Specializations
@@ -13,6 +13,7 @@ class RosterView(ListView):
     template_name = 'teachers/roster_mentors.html'
     context_object_name = 'profiles'
     paginate_by = 3
+    allow_empty = True
 
     def get_queryset(self):
         queryset = super().get_queryset().exclude(is_staff=True)
@@ -43,6 +44,16 @@ class RosterView(ListView):
         context['locality'] = Locations.objects.all()
         context['specializations'] = Specializations.objects.all()
         return context
+
+class MentorView(DetailView):
+
+    template_name = 'teachers/card_mentor.html'
+    pk_url_kwarg = 'mentors_id'
+    context_object_name = 'profiles'
+
+    def get_object(self, **kwargs):
+        profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
+        return profiles
 
 # def roster(request):
 #
@@ -107,13 +118,3 @@ class RosterView(ListView):
 #         "profiles": profiles,
 #     }
 #     return render(request, "teachers/card_mentor.html", context=context)
-
-class MentorView(DetailView):
-
-    template_name = 'teachers/card_mentor.html'
-    pk_url_kwarg = 'mentors_id'
-    context_object_name = 'profiles'
-
-    def get_object(self, **kwargs):
-        profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
-        return profiles
