@@ -1,7 +1,8 @@
 from django.contrib import auth, messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -11,15 +12,26 @@ from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
 from users.forms import TeacherRegisterForm, ProfileUpdateForm
 
-@login_required
-def profile(request):
-    profiles = Teacher_profile.objects.filter(id=request.user.id)
 
-    context = {
-        "profiles": profiles,
-    }
+class TeacherProfileView(LoginRequiredMixin, DetailView):
+    template_name = "users/profile.html"
+    context_object_name = 'profiles'
 
-    return render(request, "users/profile.html", context)
+    def get_object(self, **kwargs):
+        profiles = Teacher_profile.objects.filter(id=self.request.user.id)
+        return profiles
+
+
+
+# @login_required
+# def profile(request):
+#     profiles = Teacher_profile.objects.filter(id=request.user.id)
+#
+#     context = {
+#         "profiles": profiles,
+#     }
+#
+#     return render(request, "users/profile.html", context)
 
 @login_required
 def change_profile(request):
@@ -71,12 +83,10 @@ class UserRegestrationView(CreateView):
     success_url = reverse_lazy('users:profile')
 
     def form_valid(self, form):
-        if form.is_valid():
-            form.save()
-            users = form.instance
-            auth.login(self.request, users)
-            messages.success(self.request, "You have successfully registered and logged into your account.")
-            return HttpResponseRedirect(self.success_url)
+        users = form.save()
+        auth.login(self.request, users)
+        messages.success(self.request, "You have successfully registered and logged into your account.")
+        return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
