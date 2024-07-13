@@ -1,6 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -61,6 +62,36 @@ class UserLoginView(LoginView):
             return redirect_page
         return reverse_lazy('main:main')
 
+
+
+
+class UserRegestrationView(CreateView):
+    template_name = 'users/registration.html'
+    form_class = TeacherRegisterForm
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            form.save()
+            users = form.instance
+            auth.login(self.request, users)
+            messages.success(self.request, "You have successfully registered and logged into your account.")
+            return HttpResponseRedirect(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        context['specializations'] = Specializations.objects.all()
+        return context
+
+
+@login_required
+def logout_view(request):
+    messages.success(request, "You have successfully log out your account.")
+    auth.logout(request)
+
+    return HttpResponseRedirect(reverse('main:main'))
+
 # def login_view(request):
 #     if request.method == 'POST':
 #         form = TeacherLoginForm(data=request.POST)
@@ -91,36 +122,27 @@ class UserLoginView(LoginView):
 #     }
 #     return render(request, 'users/login.html', context)
 
-
-
-def registration(request):
-    specializations = Specializations.objects.all()
-    locations = Locations.objects.all()
-
-    if request.method == 'POST':
-        form = TeacherRegisterForm(data=request.POST)
-
-        if form.is_valid():
-            form.save()
-            users = form.instance
-            auth.login(request, users)
-            messages.success(request, "You have successfully registered and logged into your account.")
-            return HttpResponseRedirect(reverse('main:main'))
-
-    else:
-        form = TeacherRegisterForm()
-
-    context = {
-        'specializations': specializations,
-        'locations': locations,
-        'form': form
-    }
-
-    return render(request, "users/registration.html", context=context)
-
-@login_required
-def logout_view(request):
-    messages.success(request, "You have successfully log out your account.")
-    auth.logout(request)
-
-    return HttpResponseRedirect(reverse('main:main'))
+# def registration(request):
+#     specializations = Specializations.objects.all()
+#     locations = Locations.objects.all()
+#
+#     if request.method == 'POST':
+#         form = TeacherRegisterForm(data=request.POST)
+#
+#         if form.is_valid():
+#             form.save()
+#             users = form.instance
+#             auth.login(request, users)
+#             messages.success(request, "You have successfully registered and logged into your account.")
+#             return HttpResponseRedirect(reverse('main:main'))
+#
+#     else:
+#         form = TeacherRegisterForm()
+#
+#     context = {
+#         'specializations': specializations,
+#         'locations': locations,
+#         'form': form
+#     }
+#
+#     return render(request, "users/registration.html", context=context)
