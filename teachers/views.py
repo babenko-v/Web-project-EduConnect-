@@ -63,6 +63,7 @@ class MentorView(DetailView):
         profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
         return profiles
 
+
 # def roster(request):
 #
 #     modes = Mode_teaching.objects.all()
