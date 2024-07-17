@@ -3,8 +3,9 @@ venv/
 .pylintrc
 __pycache__/
 
-.idea
+cache/
 
+.idea
 
 db.sqlite3
 media/

@@ -22,45 +22,55 @@ class TeacherProfileView(LoginRequiredMixin, DetailView):
         return profiles
 
 
+class TeacherProfileUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "users/change_profile.html"
+    form_class = ProfileUpdateForm
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
+        messages.success(self.request, "You have successfully change info into your account.")
+        return super().form_valid(form)
+
+    def get_object(self, **kwargs):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        context['specializations'] = Specializations.objects.all()
+        context['modes'] = Mode_teaching.objects.all()
+        return context
+
+
 
 # @login_required
-# def profile(request):
-#     profiles = Teacher_profile.objects.filter(id=request.user.id)
+# def change_profile(request):
+#     modes = Mode_teaching.objects.all()
+#     locations = Locations.objects.all()
+#
+#     specializations = Specializations.objects.all()
+#
+#     if request.method == 'POST':
+#         form = ProfileUpdateForm(data=request.POST, instance=request.user)
+#
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "You have successfully change info into your account.")
+#
+#             return HttpResponseRedirect(reverse('main:main'))
+#
+#     else:
+#         form = ProfileUpdateForm(instance=request.user)
+#
 #
 #     context = {
-#         "profiles": profiles,
+#         'modes': modes,
+#         'locations': locations,
+#         'form': form,
+#         'specializations': specializations
 #     }
 #
-#     return render(request, "users/profile.html", context)
-
-@login_required
-def change_profile(request):
-    modes = Mode_teaching.objects.all()
-    locations = Locations.objects.all()
-
-    specializations = Specializations.objects.all()
-
-    if request.method == 'POST':
-        form = ProfileUpdateForm(data=request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, "You have successfully change info into your account.")
-
-            return HttpResponseRedirect(reverse('main:main'))
-
-    else:
-        form = ProfileUpdateForm(instance=request.user)
-
-
-    context = {
-        'modes': modes,
-        'locations': locations,
-        'form': form,
-        'specializations': specializations
-    }
-
-    return render(request, 'users/change_profile.html', context)
+#     return render(request, 'users/change_profile.html', context)
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
@@ -156,3 +166,13 @@ def logout_view(request):
 #     }
 #
 #     return render(request, "users/registration.html", context=context)
+
+# @login_required
+# def profile(request):
+#     profiles = Teacher_profile.objects.filter(id=request.user.id)
+#
+#     context = {
+#         "profiles": profiles,
+#     }
+#
+#     return render(request, "users/profile.html", context)
