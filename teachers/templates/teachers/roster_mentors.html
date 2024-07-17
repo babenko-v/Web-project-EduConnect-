@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cache %}
 {% load teachers_tags %}
+
 
 {% block content %}
 <head>
@@ -29,14 +31,16 @@
                 Select type of studying
             </button>
             <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
-                {% for mode in modes %}
-                    <li>
-                        <button type="button" class="dropdown-item"
-                                onclick="updateDropdown('expId', '{{ mode.name_mode }}', 'experienceInput')">
-                            {{ mode.name_mode }} studying
-                        </button>
-                    </li>
-                {% endfor %}
+                {% cache 180 type_teaching %}
+                    {% for mode in modes %}
+                        <li>
+                            <button type="button" class="dropdown-item"
+                                    onclick="updateDropdown('expId', '{{ mode.name_mode }}', 'experienceInput')">
+                                {{ mode.name_mode }} studying
+                            </button>
+                        </li>
+                    {% endfor %}
+                {% endcache %}
             </ul>
             <div id="expId" class="display-text">{% if request.GET.type_std %}{{ request.GET.type_std }} studying {% endif %}</div>
             <input type="hidden" id="experienceInput" name="type_std" class="input_filt">
@@ -49,14 +53,14 @@
                 Choose location
             </button>
             <ul class="dropdown-menu" aria-labelledby="locationDropdown">
-                {% for loca in locality %}
-                    <li>
-                        <button type="button" class="dropdown-item"
-                                onclick="updateDropdown('locId', '{{ loca.name }}', 'locationInput')">
-                            {{ loca.name }}
-                        </button>
-                    </li>
-                {% endfor %}
+                    {% for loca in locality %}
+                        <li>
+                            <button type="button" class="dropdown-item"
+                                    onclick="updateDropdown('locId', '{{ loca.name }}', 'locationInput')">
+                                {{ loca.name }}
+                            </button>
+                        </li>
+                    {% endfor %}
             </ul>
             <div id="locId" class="display-text"> {% if request.GET.location %}{{ request.GET.location }}{% endif %}</div>
             <input type="hidden" id="locationInput" name="location" class="input_filt">
@@ -146,22 +150,24 @@
                     <button class='list-group-item category' role="button">All mentors</button>
                 </li>
 
-                {% for spec in specializations %}
-                    <li class="jj">
-                        <button class='list-group-item category' type='button'
-                            {% if request.GET.speciality == spec.name_spec %}
-                                style="
-                                    border: 2px solid white;
-                                    background: #649C3F;
-                                    color: white;
-                                    font-weight: bold;
-                                "
-                            {% endif %}
-                            onclick="updateDropdown('specId', '{{ spec.name_spec }}', 'specialityInput')">
-                            {{ spec.name_spec }}
-                        </button>
-                    </li>
+                {% cache 180 specialization %}
+                    {% for spec in specializations %}
+                        <li class="jj">
+                            <button class='list-group-item category' type='button'
+                                {% if request.GET.speciality == spec.name_spec %}
+                                    style="
+                                        border: 2px solid white;
+                                        background: #649C3F;
+                                        color: white;
+                                        font-weight: bold;
+                                    "
+                                {% endif %}
+                                onclick="updateDropdown('specId', '{{ spec.name_spec }}', 'specialityInput')">
+                                {{ spec.name_spec }}
+                            </button>
+                        </li>
                 {% endfor %}
+                {% endcache %}
 
             </ul>
             <div id="specId" style="visibility: hidden"></div>

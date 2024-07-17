@@ -3,6 +3,7 @@ from django.views.generic import DetailView, ListView
 
 from teachers.models import Specializations
 from users.models import Locations, Mode_teaching, Teacher_profile
+from django.core.cache import cache
 from teachers.utils import search_query
 
 from django.shortcuts import render
@@ -41,8 +42,15 @@ class RosterView(ListView):
         context = super().get_context_data(**kwargs)
         context['profiles_amount'] = self.get_queryset().count()
         context['modes'] = Mode_teaching.objects.all()
-        context['locality'] = Locations.objects.all()
         context['specializations'] = Specializations.objects.all()
+
+        locations = cache.get('locations')
+        if not locations:
+            locations = Locations.objects.all()
+            cache.set('locations', locations, 180)
+
+        context['locality'] = locations
+
         return context
 
 class MentorView(DetailView):
