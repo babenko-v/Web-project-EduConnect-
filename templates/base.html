@@ -77,11 +77,9 @@
                 <li class="action-list-item list-group-item">
                     <a class='choose_btn' href="{% url 'main:about' %}" role="button">About Us</a>
                 </li>
-{#                {% if user.teacher %}#}
-{#                    <li class="action-list-item list-group-item">#}
-{#                        <a>My account</a>#}
-{#                    </li>#}
-{#                {% endif %}#}
+                  <li class="action-list-item list-group-item">
+                        <a class='choose_btn' href="{% url 'teachers:complaint' %}" role="button">Complaint a teacher </a>
+                  </li>
               </ul>
                 <div class="container mt-4 instruct">
                     <small>

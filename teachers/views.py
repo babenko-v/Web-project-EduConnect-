@@ -1,10 +1,13 @@
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, CreateView
 
-from django.views.generic import DetailView, ListView
-
-from teachers.models import Specializations
+from teachers.models import Specializations, Complaints
 from users.models import Locations, Mode_teaching, Teacher_profile
 from django.core.cache import cache
 from teachers.utils import search_query
+from teachers.forms import ComplaintForm
 
 from django.shortcuts import render
 
@@ -63,6 +66,21 @@ class MentorView(DetailView):
         profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
         return profiles
 
+class ComplaintView(CreateView):
+    template_name = 'teachers/complaint_to_teacher.html'
+
+    form_class = ComplaintForm
+    success_url = reverse_lazy('main:main')
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "You have successfully registered and logged into your account.")
+        return HttpResponseRedirect(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['complaints'] = Complaints.objects.all()
+        return context
 
 # def roster(request):
 #
