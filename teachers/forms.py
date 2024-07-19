@@ -1,10 +1,11 @@
 from django import forms
+from django.db.models.functions import Trunc
+
 from users.models import Teacher_profile
 from teachers.models import Complaints, TeachersComplaints
 
 
 class ComplaintForm(forms.ModelForm):
-    teacher_name = forms.ModelChoiceField(queryset=Teacher_profile.objects.all(), label="Teacher")
 
     class Meta:
         model = TeachersComplaints
@@ -13,17 +14,15 @@ class ComplaintForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Загружаем все жалобы из базы данных
         complaints = Complaints.objects.all()
 
-        # Создаем словарь для сопоставления ключей с идентификаторами
         self.dict_comp = {complaint.name_complaint: complaint.id for complaint in complaints}
 
-        # Создаем список кортежей для поля ChoiceField
         choices = [(complaint.name_complaint, complaint.name_complaint) for complaint in complaints]
 
-        # Устанавливаем поле complaint как ChoiceField с новыми значениями
         self.fields['complaint'] = forms.ChoiceField(choices=choices, label="Complaint")
+
+        self.fields['teacher_name'] = forms.CharField(label="Teacher Name")
 
     def clean_complaint(self):
         complaint_key = self.cleaned_data.get('complaint')
@@ -34,3 +33,14 @@ class ComplaintForm(forms.ModelForm):
             except Complaints.DoesNotExist:
                 raise forms.ValidationError("Invalid complaint selected.")
         raise forms.ValidationError("Invalid complaint selected.")
+
+    def clean_teacher_name(self):
+        teacher_name_key = self.cleaned_data.get('teacher_name')
+        teacher_obj = Teacher_profile.objects.get(username=teacher_name_key)
+        if teacher_obj:
+            try:
+                return Teacher_profile.objects.get(pk=teacher_obj.id)
+            except Teacher_profile.DoesNotExist:
+                raise forms.ValidationError("Invalid teacher name selected.")
+        raise forms.ValidationError("Invalid teacher name selected.")
+
