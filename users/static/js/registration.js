@@ -31,18 +31,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-$(document).ready(function () {
-    $('#id_main_specialty').on('input', function () {
-        var selectedOption = $('option[value="' + $(this).val() + '"]', '#specialties');
-        if (selectedOption.length > 0) {
-            $(this).val(selectedOption.data('id'));
-        }
-    });
-
-    $('#id_locations').on('input', function () {
-        var selectedOption = $('option[value="' + $(this).val() + '"]', '#cityes');
-        if (selectedOption.length > 0) {
-            $(this).val(selectedOption.data('id'));
-        }
-    });
-});

@@ -46,7 +46,7 @@
                 <input type="text" list="cityes" id="id_locations" name="locations" placeholder="Location" required>
                 <datalist id="cityes">
                     {% for loca in locations %}
-                    <option value="{{ loca.name }}" data-id="{{ loca.id }}"></option>
+                        <option value="{{ loca.name }}"></option>
                     {% endfor %}
                 </datalist>
 
@@ -54,7 +54,7 @@
                        placeholder="Specialization" required>
                 <datalist id="specialties">
                     {% for spec in specializations %}
-                    <option value="{{ spec.name_spec }}" data-id="{{ spec.id }}"></option>
+                        <option value="{{ spec.name_spec }}"></option>
                     {% endfor %}
                 </datalist>
             </div>

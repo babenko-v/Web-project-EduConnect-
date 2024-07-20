@@ -15,8 +15,8 @@ class TeacherRegisterForm(UserCreationForm):
     password1 = forms.CharField()
     password2 = forms.CharField()
 
-    locations = forms.ModelChoiceField(queryset=Locations.objects.all())
-    main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all())
+    locations = forms.CharField()
+    main_specialty = forms.CharField()
 
     class Meta:
         model = Teacher_profile
@@ -27,6 +27,20 @@ class TeacherRegisterForm(UserCreationForm):
                   'password2',
                   'locations',
                   'main_specialty')
+
+    def clean_locations(self):
+        location_key = self.cleaned_data.get('locations')
+        try:
+            return Locations.objects.get(name=location_key)
+        except Locations.DoesNotExist:
+            raise forms.ValidationError("Invalid complaint selected.")
+
+    def clean_main_specialty(self):
+        specialization_key = self.cleaned_data.get('main_specialty')
+        try:
+            return Specializations.objects.get(name_spec=specialization_key)
+        except Specializations.DoesNotExist:
+            raise forms.ValidationError("Invalid complaint selected.")
 
 
 class ProfileUpdateForm(UserChangeForm):
