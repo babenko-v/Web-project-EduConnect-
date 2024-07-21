@@ -3,7 +3,6 @@
 {% load cache %}
 {% load teachers_tags %}
 
-
 {% block content %}
 <head>
     <link rel="stylesheet" href="{% static "css/teachers.css" %}">
@@ -24,7 +23,6 @@
     {% endif %}
 
         <!-- Фильтры -->
-        <!-- Фильтр типа обучения -->
         <div class="dropdown d-inline-block me-2">
             <button class="btn btn-success dropdown-toggle choose_sort_btn" id="experienceDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,14 +51,14 @@
                 Choose location
             </button>
             <ul class="dropdown-menu" aria-labelledby="locationDropdown">
-                    {% for loca in locality %}
-                        <li>
-                            <button type="button" class="dropdown-item"
-                                    onclick="updateDropdown('locId', '{{ loca.name }}', 'locationInput')">
-                                {{ loca.name }}
-                            </button>
-                        </li>
-                    {% endfor %}
+                {% for loca in locality %}
+                    <li>
+                        <button type="button" class="dropdown-item"
+                                onclick="updateDropdown('locId', '{{ loca.name }}', 'locationInput')">
+                            {{ loca.name }}
+                        </button>
+                    </li>
+                {% endfor %}
             </ul>
             <div id="locId" class="display-text"> {% if request.GET.location %}{{ request.GET.location }}{% endif %}</div>
             <input type="hidden" id="locationInput" name="location" class="input_filt">
@@ -98,7 +96,12 @@
                     </button>
                 </li>
             </ul>
-            <div id="sortId" class="display-text-sort"></div>
+            <div id="sortId" class="display-text-sort">
+                {% if request.GET.sort %}
+                    {{ request.GET.sort|sort_name }}
+                {% endif %}
+            </div>
+
             <input type="hidden" id="sortInput" name="sort">
         </div>
 
@@ -108,18 +111,16 @@
 
     <div class="row no-gutters all_teachers">
         {% for info in profiles %}
-            {% if info.is_staff == False %}
+            {% if not info.is_staff %}
             <div class="container col-md-8 mt-4 teacher_card">
                 <div class="mt-4 info_abt">
                     <h2 class="full_name">
-
                         {% autoescape off %}
                             {% if info.headline_firstname %}
                                 {{ info.headline_firstname }}
                             {% else %}
                                 {{ info.first_name }}
                             {% endif %}
-
                             {% if info.headline_lastname %}
                                 {{ info.headline_lastname }}
                             {% else %}
@@ -127,7 +128,6 @@
                             {% endif %}
                         {% endautoescape %}
                     </h2>
-
                     <p class="spec"><strong>Specialization:</strong> {{ info.main_specialty }} teacher</p>
                     {% if info.age %}
                         <p class="age"><strong>Age:</strong> {{ info.age }}</p>
@@ -142,14 +142,11 @@
         {% endfor %}
 
         <div class="col-md-4 categ_filt">
-
             <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
-
             <ul class="filter_right">
                 <li class="jj">
                     <button class='list-group-item category' role="button">All mentors</button>
                 </li>
-
                 {% cache 180 specialization %}
                     {% for spec in specializations %}
                         <li class="jj">
@@ -166,13 +163,11 @@
                                 {{ spec.name_spec }}
                             </button>
                         </li>
-                {% endfor %}
+                    {% endfor %}
                 {% endcache %}
-
             </ul>
             <div id="specId" style="visibility: hidden"></div>
             <input type="hidden" id="specialityInput" name="speciality" class="input_filt">
-
         </div>
     </div>
 </form>
@@ -183,7 +178,6 @@
             <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
                 <a class="page-link" href="?{% if page_obj.has_previous %}{% change_params page=page_obj.previous_page_number %}{% else %}#{% endif %}">Previous</a>
             </li>
-
             {% for page in page_obj.paginator.page_range %}
                 {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
                     <li class="page-item {% if page_obj.number == page %} active {% endif %}">
@@ -191,7 +185,6 @@
                     </li>
                 {% endif %}
             {% endfor %}
-
             <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
                 <a class="page-link" href="?{% if page_obj.has_next %}{% change_params page=page_obj.next_page_number %}{% else %}#{% endif %}">Next</a>
             </li>

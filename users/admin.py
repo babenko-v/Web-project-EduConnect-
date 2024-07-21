@@ -8,7 +8,7 @@ from users.models import Mode_teaching, Teacher_profile, Locations
 
 @admin.register(Teacher_profile)
 class TeacherProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'first_name', 'last_name',  'email', 'phone')
+    list_display = ('username', 'first_name', 'last_name',  'email', 'phone', 'age')
     search_fields = ('username', 'first_name', 'last_name',  'email', 'phone')
     list_filter = ('first_name', 'last_name', 'age', 'experience', 'locations')
     fields = [

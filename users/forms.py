@@ -1,8 +1,11 @@
 import re
+from contextlib import nullcontext
+from email.policy import default
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 from django.core.exceptions import ValidationError
+from setuptools._vendor.jaraco.context import null
 
 from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
@@ -48,10 +51,10 @@ class ProfileUpdateForm(UserChangeForm):
     first_name = forms.CharField(validators=[fullname_validator])
     last_name = forms.CharField(validators=[fullname_validator])
     username = forms.CharField(required=False)
-    phone = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    age = forms.CharField(required=False, validators=[numeric_validator])
-    experience = forms.CharField(required=False, validators=[numeric_validator])
+    phone = forms.CharField(required=False, empty_value=None)
+    email = forms.EmailField(required=False, empty_value=None)
+    age = forms.CharField(required=False, validators=[numeric_validator], empty_value=None)
+    experience = forms.CharField(required=False, validators=[numeric_validator], empty_value=None)
     info_about_teacher = forms.CharField(required=False)
     work_experience = forms.CharField(required=False)
     other_specialities = forms.CharField(required=False)
@@ -62,22 +65,26 @@ class ProfileUpdateForm(UserChangeForm):
     mode_teaching = forms.ModelChoiceField(queryset=Mode_teaching.objects.all(), required=False)
 
     def clean_phone(self):
-        data = self.cleaned_data['phone']
+        phone = self.cleaned_data['phone']
+        if not phone:
+            return None
 
-        if not data.isdigit():
+        if not phone.isdigit():
             raise forms.ValidationError("The phone number must contain only digits")
 
         pattern = re.compile(r'^\d{10}$')
-        if not pattern.match(data):
+        if not pattern.match(phone):
             raise forms.ValidationError("The phone number must be 10 digits long")
 
-        return data
+        return phone
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        if not email:  # if email is empty, return None
+            return None
         if not re.match(r'^[a-zA-Z0-9._%+-]+@gmail\.com$', email):
             raise ValidationError("The email must include @gmail.com and be in English.")
         return email
-
 
 
     class Meta:

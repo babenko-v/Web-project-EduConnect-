@@ -1,7 +1,10 @@
+from contextlib import nullcontext
+
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
+from pkg_resources import null_ns_handler
 
 from teachers.models import Specializations, Complaints
 from users.models import Locations, Mode_teaching, Teacher_profile
@@ -22,11 +25,15 @@ class RosterView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset().exclude(is_staff=True)
 
+
         query = self.request.GET.get('q')
         type_std = self.request.GET.get('type_std')
         speciality = self.request.GET.get('speciality')
         location = self.request.GET.get('location')
         sort = self.request.GET.get('sort')
+        print("v func", queryset)
+        print(sort)
+        print(Teacher_profile.objects.exclude(is_staff=True).order_by('age'))
 
         if query:
             queryset = search_query(query)
@@ -38,8 +45,11 @@ class RosterView(ListView):
             queryset = queryset.filter(locations__name=location)
         if sort:
             queryset = queryset.order_by(sort)
+        print("posle", queryset)
 
         return queryset
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
