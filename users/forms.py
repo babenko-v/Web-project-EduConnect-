@@ -5,7 +5,6 @@ from email.policy import default
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 from django.core.exceptions import ValidationError
-from setuptools._vendor.jaraco.context import null
 
 from users.models import Teacher_profile, Locations, Mode_teaching
 from teachers.models import  Specializations
@@ -60,9 +59,9 @@ class ProfileUpdateForm(UserChangeForm):
     other_specialities = forms.CharField(required=False)
     education = forms.CharField(required=False)
 
-    locations = forms.ModelChoiceField(queryset=Locations.objects.all())
+    locations = forms.CharField()
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
-    mode_teaching = forms.ModelChoiceField(queryset=Mode_teaching.objects.all(), required=False)
+    mode_teaching = forms.CharField()
 
     def clean_phone(self):
         phone = self.cleaned_data['phone']
@@ -85,6 +84,20 @@ class ProfileUpdateForm(UserChangeForm):
         if not re.match(r'^[a-zA-Z0-9._%+-]+@gmail\.com$', email):
             raise ValidationError("The email must include @gmail.com and be in English.")
         return email
+
+    def clean_locations(self):
+        location_key = self.cleaned_data.get('locations')
+        try:
+            return Locations.objects.get(name=location_key)
+        except Locations.DoesNotExist:
+            raise forms.ValidationError("Invalid complaint selected.")
+
+    def clean_mode_teaching(self):
+        mode_key = self.cleaned_data.get('mode_teaching')
+        try:
+            return Mode_teaching.objects.get(name_mode=mode_key)
+        except Mode_teaching.DoesNotExist:
+            raise forms.ValidationError("Invalid complaint selected.")
 
 
     class Meta:

@@ -34,9 +34,15 @@ class TeacherProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, **kwargs):
         return self.request.user
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['locations'] = self.request.user.locations
+        initial['mode_teaching'] = self.request.user.mode_teaching
+        return initial
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['locations'] = Locations.objects.all()
+        context['location'] = Locations.objects.all()
         context['specializations'] = Specializations.objects.all()
         context['modes'] = Mode_teaching.objects.all()
         return context

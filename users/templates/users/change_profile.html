@@ -70,7 +70,7 @@
 
                                 <datalist id="type_teaching">
                                     {% for type in modes %}
-                                        <option value="{{ type.id }}">{{ type.name_mode }}</option>
+                                        <option value="{{ type.name_mode }}"></option>
                                     {% endfor %}
                                 </datalist>
                         </div>
@@ -85,8 +85,8 @@
                                        value="{{ form.locations.value }}">
 
                                 <datalist id="cityes">
-                                    {% for loca in locations %}
-                                        <option value="{{ loca.id }}">{{ loca.name }}</option>
+                                    {% for loca in location %}
+                                        <option value="{{ loca.name }}"></option>
                                     {% endfor %}
                                 </datalist>
 
