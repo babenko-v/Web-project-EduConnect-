@@ -8,8 +8,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 55px;
 
+    .profile-image {
+        margin-left: 30px;
+        margin-bottom: 10px;
+    }
+
     .info_abt {
-        margin-left: 250px;
+        margin-left: 50px;
     }
 }
 
@@ -178,6 +183,8 @@
         }
     }
 }
+
+
 
 
 

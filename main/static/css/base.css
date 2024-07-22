@@ -55,7 +55,7 @@
 
 .scrollable-region {
       overflow-y: auto;
-      max-height: 400px; /* Example height */
+      max-height: 400px;
     }
    .action-list-wrap {
       padding: 0;
@@ -126,7 +126,7 @@ a {
 
 .modal_btn {
   width: 125px;
-  height: 50px;
+  height: 45px;
   border-radius: 5px;
   border: none;
   transition: all 0.5s ease-in-out;
