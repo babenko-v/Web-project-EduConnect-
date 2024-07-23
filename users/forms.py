@@ -61,7 +61,7 @@ class ProfileUpdateForm(UserChangeForm):
 
     locations = forms.CharField()
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
-    mode_teaching = forms.CharField()
+    mode_teaching = forms.CharField(required=False, empty_value=None)
 
     def clean_phone(self):
         phone = self.cleaned_data['phone']
@@ -76,6 +76,7 @@ class ProfileUpdateForm(UserChangeForm):
             raise forms.ValidationError("The phone number must be 10 digits long")
 
         return phone
+
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -95,6 +96,8 @@ class ProfileUpdateForm(UserChangeForm):
     def clean_mode_teaching(self):
         mode_key = self.cleaned_data.get('mode_teaching')
         try:
+            if not mode_key:
+                return None
             return Mode_teaching.objects.get(name_mode=mode_key)
         except Mode_teaching.DoesNotExist:
             raise forms.ValidationError("Invalid complaint selected.")

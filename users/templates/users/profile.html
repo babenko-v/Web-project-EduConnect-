@@ -10,7 +10,13 @@
     <body>
         <div class="profile-container">
             <div class="profile-header">
-                <div class="profile-picture"></div>
+                <div class="profile-picture">
+                    {% if 5 < 2 %}
+                        pass
+                    {% else %}
+                        <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
+                    {% endif %}
+                </div>
                 <div class="profile-info">
 
                     {% for info in profiles %}

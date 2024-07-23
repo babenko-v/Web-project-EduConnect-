@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Получаем все кнопки переключения видимости пароля
     const togglePasswordButtons = document.querySelectorAll('.toggle-password');
 
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (passwordField) {
             // Добавляем обработчик клика для кнопки
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 // Переключаем тип поля пароля
                 const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordField.setAttribute('type', type);
@@ -25,9 +25,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const password2 = document.getElementById('id_password2');
 
     if (password1 && password2) {
-        password1.addEventListener('input', function() {
+        password1.addEventListener('input', function () {
             password2.value = password1.value;
         });
     }
 });
+
+
+document.getElementById('id_image').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+    document.querySelector('.profile-image').src = e.target.result;
+}
+    reader.readAsDataURL(file);
+}
+});
+
 

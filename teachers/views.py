@@ -31,9 +31,6 @@ class RosterView(ListView):
         speciality = self.request.GET.get('speciality')
         location = self.request.GET.get('location')
         sort = self.request.GET.get('sort')
-        print("v func", queryset)
-        print(sort)
-        print(Teacher_profile.objects.exclude(is_staff=True).order_by('age'))
 
         if query:
             queryset = search_query(query)
@@ -45,7 +42,6 @@ class RosterView(ListView):
             queryset = queryset.filter(locations__name=location)
         if sort:
             queryset = queryset.order_by(sort)
-        print("posle", queryset)
 
         return queryset
 
