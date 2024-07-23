@@ -31,7 +31,7 @@
                         </h2>
 
                         {% block edit_profile %}
-                            <a href="{% url 'users:change_profile' %}">
+                            <a class="edit_profile" href="{% url 'users:change_profile' %}">
                                 Edit profile
                             </a>
                         {% endblock %}
@@ -64,21 +64,27 @@
 
                         <div class="profile-content">
                             <div class="profile-details">
-                                <h3>
-                                    <strong class="header_prof">Info about you</strong>
-                                </h3>
-                                        <p>
-                                             {{ info.info_about_teacher|default_no_info }}
-                                        </p>
+                                <div class="block_info">
+                                     <h3>
+                                        <strong class="header_prof">Info about you</strong>
+                                    </h3>
+                                    <p class="info">{{ info.info_about_teacher|default_no_info }}</p>
+                                </div>
 
-                                <h3>
-                                    <strong class="header_prof">Work Experience</strong>
-                                </h3>
-                                    {{ info.work_experience|default_no_info }}
-                                <h3>
-                                    <strong class="header_prof">Other specialization</strong>
-                                </h3>
-                                    {{ info.other_specialities|default_no_info }}
+                                <div class="block_info">
+                                    <h3>
+                                        <strong class="header_prof">Work Experience</strong>
+                                    </h3>
+                                        <p class="info">{{ info.work_experience|default_no_info }}</p>
+                                </div>
+
+                                <div class="block_info">
+                                    <h3>
+                                        <strong class="header_prof">Other specialization</strong>
+                                    </h3>
+                                        <p class="info">{{ info.other_specialities|default_no_info }}</p>
+                                </div>
+
                             </div>
 
                             <div class="contact-details">

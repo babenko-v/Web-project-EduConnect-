@@ -26,10 +26,6 @@
                 margin-bottom: 30px;
             }
 
-            .profile-picture {
-
-            }
-
             .profile-info {
                 flex: 1;
                 margin-bottom: 20px;
@@ -52,8 +48,6 @@
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: wrap;
-
-
             }
 
             .contact-info div {
@@ -68,6 +62,8 @@
 
                 .header_prof {
                     font-size: 24px;
+                    margin-left: 10px;
+
                 }
             }
 
@@ -81,10 +77,12 @@
         }
 
  .header_prof {
+     box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
      background-color: #BBA58E;
      border-radius: 10px;
      color: #F5F5DC;
      padding: 1px 6px;
+     margin-bottom: 10px;
  }
 
  .add_info, .contact_input_info {
@@ -175,7 +173,7 @@
 
 .edit-photo-container {
     text-align: center;
-    margin-top: 10px;
+
 }
 
 .edit-photo-label {
@@ -197,3 +195,56 @@
 .edit-photo-label:hover {
     background-color: #0056b3;
 }
+
+.edit_profile {
+ padding: 0.7em 1em;
+ border: 2px solid #fff;
+ font-size: 15px;
+ color: #131313;
+ cursor: pointer;
+ position: absolute;
+ top: 7.2rem;
+ left: 60rem;
+ overflow: hidden;
+ transition: all 0.3s;
+ border-radius: 12px;
+ background-color: #ecd448;
+ font-weight: bolder;
+ box-shadow: 0 2px 0 2px #000;
+}
+
+.edit_profile:before {
+ content: "";
+ position: absolute;
+ cursor: pointer;
+ width: 100px;
+ height: 120%;
+ background-color: #ff6700;
+ top: 50%;
+ transform: skewX(30deg) translate(-150%, -50%);
+ transition: all 0.5s;
+}
+
+.edit_profile:hover {
+ background-color: #46fc52;
+ color: #fff;
+ box-shadow: 0 2px 0 2px #0d3b66;
+}
+
+.edit_profile:hover::before {
+ transform: skewX(30deg) translate(150%, -50%);
+ transition-delay: 0.1s;
+}
+
+.edit_profile:active {
+ transform: scale(0.9);
+}
+
+.block_info{
+    margin-bottom: 30px;
+
+    .info {
+        margin-top: 10px;
+    }
+}
+
