@@ -13,7 +13,7 @@
     <div class="profile-header">
         <div class="profile-picture">
             {% if form.image.value %}
-                <img src="{{ form.image.value.url }}" class="profile-image rounded-circle me-4" alt="...">
+                <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4" alt="...">
             {% else %}
                 <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
             {% endif %}

@@ -63,6 +63,8 @@ class ProfileUpdateForm(UserChangeForm):
     main_specialty = forms.ModelChoiceField(queryset=Specializations.objects.all(), required=False)
     mode_teaching = forms.CharField(required=False, empty_value=None)
 
+    image = forms.ImageField(required=False)
+
     def clean_phone(self):
         phone = self.cleaned_data['phone']
         if not phone:
@@ -118,7 +120,8 @@ class ProfileUpdateForm(UserChangeForm):
                   'main_specialty',
                   'mode_teaching',
                   'phone',
-                  'email'
+                  'email',
+                  'image'
                   )
 
 

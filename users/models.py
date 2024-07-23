@@ -23,6 +23,7 @@ class Mode_teaching(models.Model):
 
 
 class Teacher_profile(AbstractUser):
+
     username = models.CharField(unique=True, max_length=50, verbose_name='identifier')
     age = models.CharField(null=True, blank=True)
     experience = models.CharField(null=True, blank=True)
@@ -36,6 +37,8 @@ class Teacher_profile(AbstractUser):
     locations = models.ForeignKey(to=Locations, blank=True, null=True, on_delete=models.PROTECT)
     main_specialty = models.ForeignKey(to=Specializations, blank=True, null=True, on_delete=models.PROTECT)
     mode_teaching = models.ForeignKey(to=Mode_teaching, blank=True, null=True, on_delete=models.PROTECT)
+
+    image = models.ImageField(upload_to='users_image', blank=True, null=True)
 
     class Meta:
         db_table = 'info_teacher'

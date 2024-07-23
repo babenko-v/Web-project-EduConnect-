@@ -11,8 +11,8 @@
         <div class="profile-container">
             <div class="profile-header">
                 <div class="profile-picture">
-                    {% if 5 < 2 %}
-                        pass
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4">
                     {% else %}
                         <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
                     {% endif %}
