@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
 from pkg_resources import null_ns_handler
+from setuptools.command.build import build
 
 from teachers.models import Specializations, Complaints
 from users.models import Locations, Mode_teaching, Teacher_profile
@@ -71,7 +72,6 @@ class MentorView(DetailView):
     def get_object(self, **kwargs):
         profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
         return profiles
-
 
 
 class ComplaintView(CreateView):

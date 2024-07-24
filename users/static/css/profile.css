@@ -45,7 +45,7 @@
 
             .contact-info {
                 margin-top: 20px;
-                width: 100%;
+                width: 105%;
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: wrap;
@@ -87,7 +87,7 @@
  }
 
  .add_info, .contact_input_info {
-     width: 130px;
+     width: 125px;
     padding: 0.2rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -121,7 +121,6 @@
     width: 13.5rem;
     padding: 4px 0;
 }
-
 
 .warning {
     font-size: 15px;
@@ -168,9 +167,7 @@
    margin-left: 20px;
 }
 
-.profile-picture {
-    text-align: center;
-}
+
 
 .edit-photo-container {
     text-align: center;
@@ -249,3 +246,15 @@
     }
 }
 
+.profile-image {
+    margin: 20px;
+    width: 210px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid lightgray;
+}
+
+.location_info {
+    margin-left: 20px;
+}

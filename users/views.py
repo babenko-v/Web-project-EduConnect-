@@ -22,6 +22,7 @@ class TeacherProfileView(LoginRequiredMixin, DetailView):
         return profiles
 
 
+
 class TeacherProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "users/change_profile.html"
     form_class = ProfileUpdateForm

@@ -113,11 +113,13 @@
         {% for info in profiles %}
             <div class="container col-md-8 mt-4 teacher_card">
                 <div class="d-flex align-items-center">
-                    {% if 5 < 2 %}
-                        pass
+                <div class="profile_picture">
+                    {% if info.image %}
+                        <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4">
                     {% else %}
                         <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
                     {% endif %}
+                </div>
 
                     <div class="mt-4 info_abt">
                         <h2 class="full_name">
