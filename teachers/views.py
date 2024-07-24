@@ -64,13 +64,12 @@ class RosterView(ListView):
         return context
 
 class MentorView(DetailView):
-
     template_name = 'teachers/card_mentor.html'
-    pk_url_kwarg = 'mentors_id'
+    slug_url_kwarg = "mentors_slug"
     context_object_name = 'profiles'
 
     def get_object(self, **kwargs):
-        profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
+        profiles = Teacher_profile.objects.filter(slug=self.kwargs.get(self.slug_url_kwarg))
         return profiles
 
 

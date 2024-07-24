@@ -1,4 +1,5 @@
 from django.db import models
+from autoslug import AutoSlugField
 from django.contrib.auth.models import AbstractUser
 from teachers.models import Specializations
 
@@ -28,6 +29,7 @@ class Teacher_profile(AbstractUser):
     age = models.CharField(null=True, blank=True)
     experience = models.CharField(null=True, blank=True)
     phone = models.CharField(verbose_name='phone number', blank=True, null=True)
+    slug = AutoSlugField(populate_from='get_full_name', unique=True, always_update=True, blank=True, null=True)
 
     info_about_teacher = models.TextField(null=True, blank=True)
     work_experience = models.TextField(null=True, blank=True)
@@ -43,6 +45,9 @@ class Teacher_profile(AbstractUser):
     class Meta:
         db_table = 'info_teacher'
         ordering = ('id',)
+
+    def get_full_name(self):
+        return f"{self.last_name}-{self.first_name}-{self.username}"
 
     def __str__(self):
         return f'{self.last_name} {self.first_name}'

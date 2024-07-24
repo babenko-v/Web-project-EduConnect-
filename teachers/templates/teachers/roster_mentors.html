@@ -143,14 +143,14 @@
                             <p class="age"><strong>Age:</strong> Information not provided</p>
                         {% endif %}
                         <p class="exp"><strong>Location:</strong> {{ info.locations }}</p>
-                        <button class="more_inf"><a href="{% url 'teachers:mentors' info.id %}" type="button">More info</a></button>
+                        <button class="more_inf"><a href="{% url 'teachers:mentors' info.slug %}" type="button">More info</a></button>
                     </div>
                 </div>
             </div>
         {% endfor %}
 
         <div class="col-md-4 categ_filt">
-            <h5 class="header"><strong>Вчителі за напрямком:</strong></h5>
+            <h5 class="header"><strong>Teachers in the field of:</strong></h5>
             <ul class="filter_right">
                 <li class="jj">
                     <button class='list-group-item category' role="button">All mentors</button>
