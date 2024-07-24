@@ -72,6 +72,8 @@ class MentorView(DetailView):
         profiles = Teacher_profile.objects.filter(id=self.kwargs.get(self.pk_url_kwarg))
         return profiles
 
+
+
 class ComplaintView(CreateView):
     template_name = 'teachers/complaint_to_teacher.html'
 

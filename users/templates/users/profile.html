@@ -11,11 +11,13 @@
         <div class="profile-container">
             <div class="profile-header">
                 <div class="profile-picture">
-                    {% if user.image %}
-                        <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4">
-                    {% else %}
-                        <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
-                    {% endif %}
+                    {% block image_user %}
+                        {% if user.image %}
+                            <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4">
+                        {% else %}
+                            <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
+                        {% endif %}
+                    {% endblock image_user %}
                 </div>
                 <div class="profile-info">
 
