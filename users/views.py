@@ -52,6 +52,10 @@ class UserLoginView(LoginView):
     template_name = 'users/login.html'
     form_class = AuthenticationForm
 
+    def form_invalid(self, form):
+        messages.warning(self.request, "Wrong password or email. Please try again.")
+        return super().form_invalid(form)
+
 
     def get_success_url(self):
         messages.success(self.request, "You are now logged in.")

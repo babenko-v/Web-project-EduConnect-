@@ -45,7 +45,7 @@
 
             .contact-info {
                 margin-top: 20px;
-                width: 105%;
+                width: 107%;
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: wrap;
@@ -87,7 +87,7 @@
  }
 
  .add_info, .contact_input_info {
-     width: 130px;
+     width: 137px;
     padding: 0.2rem;
     border: 1px solid #ddd;
     border-radius: 5px;
