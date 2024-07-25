@@ -7,10 +7,10 @@
       border: 1px solid #CCCCCC;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1, h2, h3, h4, h5, h6 {
+    .header_about_us{
       color: #333333; /* dark gray text */
     }
-    p {
+   .info_text {
       color: #666666; /* medium gray text */
     }
     .about-us-section {

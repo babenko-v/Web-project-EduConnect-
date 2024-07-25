@@ -1,20 +1,13 @@
-from contextlib import nullcontext
-
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
-from pkg_resources import null_ns_handler
-from setuptools.command.build import build
 
 from teachers.models import Specializations, Complaints
 from users.models import Locations, Mode_teaching, Teacher_profile
 from django.core.cache import cache
 from teachers.utils import search_query
 from teachers.forms import ComplaintForm
-
-from django.shortcuts import render
-
 
 class RosterView(ListView):
     model = Teacher_profile
@@ -25,7 +18,6 @@ class RosterView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset().exclude(is_staff=True)
-
 
         query = self.request.GET.get('q')
         type_std = self.request.GET.get('type_std')
@@ -45,7 +37,6 @@ class RosterView(ListView):
             queryset = queryset.order_by(sort)
 
         return queryset
-
 
 
     def get_context_data(self, **kwargs):
@@ -71,7 +62,6 @@ class MentorView(DetailView):
     def get_object(self, **kwargs):
         profiles = Teacher_profile.objects.filter(slug=self.kwargs.get(self.slug_url_kwarg))
         return profiles
-
 
 class ComplaintView(CreateView):
     template_name = 'teachers/complaint_to_teacher.html'

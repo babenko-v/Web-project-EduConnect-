@@ -48,6 +48,44 @@ class TeacherProfileUpdateView(LoginRequiredMixin, UpdateView):
         context['modes'] = Mode_teaching.objects.all()
         return context
 
+class UserLoginView(LoginView):
+    template_name = 'users/login.html'
+    form_class = AuthenticationForm
+
+
+    def get_success_url(self):
+        messages.success(self.request, "You are now logged in.")
+        redirect_page = self.request.POST.get('next', None)
+        if redirect_page and redirect_page != reverse('users:logout'):
+            return redirect_page
+        return reverse_lazy('main:main')
+
+
+class UserRegestrationView(CreateView):
+    template_name = 'users/registration.html'
+    form_class = TeacherRegisterForm
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
+        users = form.save()
+        auth.login(self.request, users)
+        messages.success(self.request, "You have successfully registered and logged into your account.")
+        return HttpResponseRedirect(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        context['specializations'] = Specializations.objects.all()
+        return context
+
+
+@login_required
+def logout_view(request):
+    messages.success(request, "You have successfully log out your account.")
+    auth.logout(request)
+
+    return HttpResponseRedirect(reverse('main:main'))
+
 
 
 # @login_required
@@ -79,45 +117,6 @@ class TeacherProfileUpdateView(LoginRequiredMixin, UpdateView):
 #
 #     return render(request, 'users/change_profile.html', context)
 
-class UserLoginView(LoginView):
-    template_name = 'users/login.html'
-    form_class = AuthenticationForm
-
-
-    def get_success_url(self):
-        messages.success(self.request, "You are now logged in.")
-        redirect_page = self.request.POST.get('next', None)
-        if redirect_page and redirect_page != reverse('users:logout'):
-            return redirect_page
-        return reverse_lazy('main:main')
-
-
-
-
-class UserRegestrationView(CreateView):
-    template_name = 'users/registration.html'
-    form_class = TeacherRegisterForm
-    success_url = reverse_lazy('users:profile')
-
-    def form_valid(self, form):
-        users = form.save()
-        auth.login(self.request, users)
-        messages.success(self.request, "You have successfully registered and logged into your account.")
-        return HttpResponseRedirect(self.success_url)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['locations'] = Locations.objects.all()
-        context['specializations'] = Specializations.objects.all()
-        return context
-
-
-@login_required
-def logout_view(request):
-    messages.success(request, "You have successfully log out your account.")
-    auth.logout(request)
-
-    return HttpResponseRedirect(reverse('main:main'))
 
 # def login_view(request):
 #     if request.method == 'POST':
