@@ -81,7 +81,7 @@ class ComplaintView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, "You have successfully registered and logged into your account.")
+        messages.success(self.request, "You have successfully submitted a complaint against a teacher, thank you for the information.")
         return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):

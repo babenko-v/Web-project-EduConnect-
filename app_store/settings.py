@@ -152,3 +152,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTH_USER_MODEL = 'users.Teacher_profile'
 
 LOGIN_URL = 'users:login'
+
+SESSION_COOKIE_AGE = 30  # 30 минут
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
