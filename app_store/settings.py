@@ -80,20 +80,20 @@ WSGI_APPLICATION = 'app_store.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'home',
-#         'USER': 'home',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'home',
+        'USER': 'home',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
 
 CACHES = {
     "default": {
