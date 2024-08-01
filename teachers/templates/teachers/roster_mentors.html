@@ -115,7 +115,7 @@
                 <div class="d-flex align-items-center">
                 <div class="profile_picture">
                     {% if info.image %}
-                        <img src="{{ user.image.url }}" class="profile-image rounded-circle me-4">
+                        <img src="{{ info.image.url }}" class="profile-image rounded-circle me-4">
                     {% else %}
                         <img src="{% static "deps/image/base_image.jpg" %}" class="profile-image rounded-circle me-4" alt="...">
                     {% endif %}

@@ -1,11 +1,11 @@
 import re
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.core.exceptions import ValidationError
 
 from users.models import Teacher_profile, Locations, Mode_teaching
-from teachers.models import  Specializations
+from teachers.models import Specializations
 from users.utils import numeric_validator, fullname_validator
 
 class TeacherRegisterForm(UserCreationForm):
