@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
 
+
 from teachers.models import Specializations, Complaints
 from users.models import Locations, Mode_teaching, Teacher_profile
 from django.core.cache import cache
